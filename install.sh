@@ -1,8 +1,8 @@
 # .bash_profile
 cat > "$HOME/.bash_profile" << EOM
-echo export HOMEBREW_CASK_OPTS="--appdir=/Applications"
-echo alias cask="brew cask"
-echo alias vi="vim"
+export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+alias cask="brew cask"
+alias vi="vim"
 EOM
 
 # brew and cask
