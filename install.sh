@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+set -euv
 
 # .bash_profile
 cat > "$HOME/.bash_profile" << EOM
