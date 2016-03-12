@@ -9,5 +9,5 @@ EOM
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew install python3
 brew cleanup
-cask install google-chrome google-drive firefox vlc transmission flux Caskroom/versions/sublime-text3
+cask install google-chrome google-drive firefox vlc transmission flux Caskroom/versions/sublime-text3 skype
 cask cleanup
