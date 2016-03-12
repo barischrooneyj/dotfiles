@@ -1,9 +1,9 @@
 # .bash_profile
-bash_profile="$HOME/.bash_profile"
-touch "$bash_profile"
-echo "export HOMEBREW_CASK_OPTS=\"--appdir=/Applications\"" >> "$bash_profile"
-echo "alias cask=\"brew cask\"" >> "$bash_profile"
-echo "alias vi=\"vim\"" >> "$bash_profile"
+cat > "$HOME/.bash_profile" << EOM
+echo export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+echo alias cask="brew cask"
+echo alias vi="vim"
+EOM
 
 # brew
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
