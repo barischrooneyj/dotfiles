@@ -1,3 +1,6 @@
+#!/bin/bash
+set -e
+
 # .bash_profile
 cat > "$HOME/.bash_profile" << EOM
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
@@ -7,7 +10,7 @@ EOM
 
 # brew and cask
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-brew install python3
+brew install python3 node
 brew cleanup
-cask install google-chrome google-drive firefox vlc transmission flux Caskroom/versions/sublime-text3 skype
+cask install Caskroom/versions/sublime-text3 firefox flux google-chrome google-drive skype transmission vlc
 cask cleanup
