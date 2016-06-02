@@ -17,11 +17,10 @@ source "$bash_profile_path"
 case "$OSTYPE" in
   darwin*)
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" || true
-    brew install node python3 wget
+    brew install ghc haskell-stack node python3 wget
     brew cleanup
     brew cask install Caskroom/versions/sublime-text3 firefox flux \
-                      ghc google-chrome google-drive haskell-stack skype
-                      transmission vlc
+                      google-chrome google-drive skype transmission vlc
     brew cask cleanup
   ;; 
   linux*)
