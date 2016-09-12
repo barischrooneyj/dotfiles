@@ -1,0 +1,16 @@
+{
+	"always_show_minimap_viewport": true,
+	"bold_folder_labels": true,
+	"draw_white_space": "all",
+	"ensure_newline_at_eof_on_save": true,
+	"fade_fold_buttons": false,
+	"find_selected_text": true,
+	"font_size": 14.0,
+	"highlight_line": true,
+	"open_files_in_new_window": false,
+    "rulers": [80, 100],
+	"shift_tab_unindent": true,
+	"tab_size": 4,
+	"translate_tabs_to_spaces": true,
+	"trim_trailing_white_space_on_save": true
+}
