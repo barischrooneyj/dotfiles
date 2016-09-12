@@ -7,26 +7,23 @@ brew cleanup
 brew cask install firefox flux google-chrome google-drive skype sublime-text transmission vlc
 brew cask cleanup
 
-# Update RC files
+# Update config files
 filemap=(
     "barischj/dotfiles/master/.bashrc $HOME/.bashrc"
+    "barischj/dotfiles/master/Preferences.sublime-settings \
+        $HOME/Library/Application\ Support/Sublime\ Text\ 3/Packages/User/Preferences.sublime-settings"
 )
-
 for line in "${filemap[@]}"; do
     read src_path dest_path <<< $line
     src_file="`wget -qO- https://raw.githubusercontent.com/$src_path`"
-    IFS=$'\n' read -rd '' -a src_lines <<< "$src_file"
-    touch "$dest_path"
-    for src_line in "${src_lines[@]}"; do
-        grep -q "$src_line" "$dest_path" || echo "$src_line" >> "$dest_path"
-    done
+    echo "$src_file" > "$dest_path"
 done
-
 source "$HOME/.bashrc"
 
-# Clone GitHub projects to ~/Documents
+# Clone GitHub repos
+msg='Enter GitHub repo to clone e.g. barischj/dotfiles or return to continue: '
 while true; do
-    read -p $'Enter a GitHub repo to clone e.g. barischj/dotfiles\n' input
+    read -p "$msg" input
     if [[ $input = "" ]]; then break; fi
     user_repo=($(echo $input | tr "/" " "))
     if (( ${#user_repo[@]} != 2 )); then
@@ -37,6 +34,6 @@ while true; do
     fi
 done
 
-# Change shell to bash 4.
+# Change shell to bash 4
 sudo bash -c 'echo /usr/local/bin/bash >> /etc/shells'
 chsh -s /usr/local/bin/bash
