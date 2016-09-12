@@ -1,4 +1,4 @@
-set -eu
+set -euo pipefail
 
 # ~/.bash_profile
 bash_profile_path=${HOME}/.bash_profile
@@ -31,9 +31,15 @@ case "$OSTYPE" in
   ;;
 esac
 
-# github projects
-repo_paths="barischj/me barischj/spin"
-for i in $repo_paths; do
-  user_repo=($(echo $i | tr "/" "\n"))
-  git clone https://github.com/${user_repo[0]}/${user_repo[1]} ${HOME}/Documents/${user_repo[1]}
+# Clone GitHub projects to ~/Documents
+while true; do
+    read -p $'Enter a GitHub repo to clone e.g. barischj/dotfiles\n' input
+    if [[ $input = "" ]]; then break; fi
+    user_repo=($(echo $input | tr "/" " "))
+    if (( ${#user_repo[@]} != 2 )); then
+        echo "Input in incorrect format";
+    else
+        git clone https://github.com/${user_repo[0]}/${user_repo[1]} \
+        ${HOME}/Documents/${user_repo[0]}/${user_repo[1]}
+    fi
 done
