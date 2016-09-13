@@ -8,7 +8,7 @@ killall Dock
 
 # Install applications with Homebrew
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" ||:
-brew install bash ghc haskell-stack node python3 wget
+brew install bash ghc haskell-stack node python3
 brew cleanup
 brew cask install firefox flux google-chrome google-drive skype sublime-text transmission vlc
 brew cask cleanup
@@ -22,7 +22,9 @@ filemap=(
 )
 for line in "${filemap[@]}"; do
     read src_path dest_path <<< $line
-    src_file="`wget -qO- https://raw.githubusercontent.com/barischj/dotfiles/master/$src_path`"
+    url="https://raw.githubusercontent.com/barischj/dotfiles/master/$src_path"
+    src_file="$(curl -fsSL $url)"
+    echo "Setting $dest_path from $url"
     echo "$src_file" > "$dest_path"
 done
 
@@ -30,16 +32,20 @@ done
 msg='Enter GitHub repo to clone e.g. barischj/dotfiles or return to continue: '
 while true; do
     read -p "$msg" input
-    if [[ $input = "" ]]; then break; fi
-    user_repo=($(echo $input | tr "/" " "))
+    if [[ "$input" = "" ]]; then break; fi
+    user_repo=($(echo "$input" | tr "/" " "))
     if (( ${#user_repo[@]} != 2 )); then
         echo "Input format incorrect";
     else
-        git clone https://github.com/${user_repo[0]}/${user_repo[1]} \
-        ${HOME}/Documents/${user_repo[0]}_${user_repo[1]}
+        git clone "https://github.com/${user_repo[0]}/${user_repo[1]}" \
+            "${HOME}/Documents/${user_repo[0]}_${user_repo[1]}" ||:
     fi
 done
 
 # Change shell to bash 4
-sudo bash -c 'echo /usr/local/bin/bash >> /etc/shells'
-chsh -s /usr/local/bin/bash
+usr_bash='/usr/local/bin/bash'
+shells='/etc/shells'
+grep -qF $usr_bash $shells || \
+    ( echo "Appending $usr_bash to $shells" && \
+      echo $usr_bash | sudo tee -a $shells )
+grep -qF $usr_bash <<< $SHELL || chsh -s $usr_bash
