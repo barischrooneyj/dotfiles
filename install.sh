@@ -3,7 +3,7 @@ set -eou pipefail
 # Configure dock.
 defaults write com.apple.dock autohide -bool true
 defaults write com.apple.dock orientation -string left
-defaults delete com.apple.dock persistent-apps
+defaults delete com.apple.dock persistent-apps ||:
 killall Dock
 
 # Install applications with Homebrew
