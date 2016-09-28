@@ -8,7 +8,8 @@ killall Dock
 
 # Install applications with Homebrew
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" ||:
-brew install bash ghc haskell-stack node python3
+brew install bash bash-completion ghc haskell-stack node python3
+brew tap homebrew/completions
 brew cleanup
 brew cask install firefox flux google-chrome google-drive skype sublime-text transmission vlc
 brew cask cleanup
