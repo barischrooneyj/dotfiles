@@ -1,6 +1,9 @@
 set -eou pipefail
 
-# Configure dock.
+# Xcode tools
+xcode-select --install
+
+# Configure dock
 defaults write com.apple.dock autohide -bool true
 defaults write com.apple.dock orientation -string left
 defaults delete com.apple.dock persistent-apps ||:
