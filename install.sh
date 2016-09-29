@@ -13,7 +13,7 @@ killall Dock
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" ||:
 brew install bash bash-completion ghc git haskell-stack node python3
 brew cleanup
-brew cask install firefox flux google-chrome google-drive skype sublime-text transmission vlc
+brew cask install docker firefox flux google-chrome google-drive skype sublime-text transmission vlc
 brew cask cleanup
 
 # Update config files
