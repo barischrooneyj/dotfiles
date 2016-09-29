@@ -28,6 +28,7 @@ for line in "${filemap[@]}"; do
     url="https://raw.githubusercontent.com/barischj/dotfiles/master/$src_path"
     src_file="$(curl -fsSL $url)"
     echo "Setting $dest_path from $url"
+    mkdir -p "$dest_path"
     echo "$src_file" > "$dest_path"
 done
 
