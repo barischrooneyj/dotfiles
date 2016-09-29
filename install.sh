@@ -1,7 +1,7 @@
 set -eou pipefail
 
 # Xcode tools
-xcode-select --install
+xcode-select --install ||:
 
 # Configure dock
 defaults write com.apple.dock autohide -bool true
