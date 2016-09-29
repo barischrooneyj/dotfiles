@@ -46,8 +46,9 @@ while true; do
     fi
 done
 
-# Open flux, manually set open at login
+# Open apps
 open /Applications/Flux.app
+open /Applications/Google\ Drive.app
 
 # Change shell to bash 4
 usr_bash='/usr/local/bin/bash'
