@@ -9,12 +9,18 @@ defaults write com.apple.dock orientation -string left
 defaults delete com.apple.dock persistent-apps ||:
 killall Dock
 
-# Install applications with Homebrew
+# Install Homebrew
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" ||:
+
+# Install command line apps
 brew install bash bash-completion git haskell-stack node python3
-brew cleanup
+
+# Install GUI apps
 brew cask install docker firefox flux google-chrome google-drive skype sublime-text transmission vlc
-brew cask cleanup
+
+# Install Fira Code font
+brew tap caskroom/fonts
+brew cask install font-fira-code
 
 # Update config files
 filemap=(
