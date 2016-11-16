@@ -9,6 +9,9 @@ defaults write com.apple.dock orientation -string left
 defaults delete com.apple.dock persistent-apps ||:
 killall Dock
 
+# Speed up cursor
+defaults write -g KeyRepeat -int 1
+
 # Install Homebrew
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" ||:
 
