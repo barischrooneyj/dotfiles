@@ -1,7 +1,8 @@
 set -eou pipefail
 
-# Xcode tools
-xcode-select --install ||:
+######
+# OS #
+######
 
 # Configure dock
 defaults write com.apple.dock autohide -bool true
@@ -12,6 +13,10 @@ killall Dock
 # Speed up cursor
 defaults write -g KeyRepeat -int 1
 
+############
+# INSTALLS #
+############
+
 # Install Homebrew
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" ||:
 
@@ -19,14 +24,30 @@ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/
 brew install bash bash-completion git haskell-stack node python3
 
 # Install GUI apps
-brew cask install docker firefox flux google-chrome google-drive skype sublime-text transmission vlc
+brew cask install atom docker firefox flux google-chrome google-drive skype sublime-text transmission vlc
 
 # Install Fira Code font
 brew tap caskroom/fonts
 brew cask install font-fira-code
 
+# Xcode tools
+xcode-select --install ||:
+
+#############
+# CONFIGURE #
+#############
+
+# ATOM
+stack install ghc-mod hlint stylish-haskell
+apm install \
+    autocomplete-haskell haskell-ghc-mod haskell-pointfree ide-haskell ide-haskell-cabal \
+    ide-haskell-repl language-haskel  \
+    ask-stack atom-beautify autocomplete-paths file-icons git-plus minimap minimap-find-and-replace \
+    minimap-highlight-selected pigments run-command script sublime-style-column-selection vim-mode
+# Config file set below
+
 # Update config files
-filemap=(
+filemap=(  # {relative url: absolute path}
     ".bash_profile $HOME/.bash_profile"
     ".bashrc $HOME/.bashrc"
     "Preferences.sublime-settings \
@@ -54,6 +75,10 @@ while true; do
             "${HOME}/Documents/${user_repo[0]}_${user_repo[1]}" ||:
     fi
 done
+
+############
+# RUN LAST #
+############
 
 # Open apps
 open /Applications/Flux.app
