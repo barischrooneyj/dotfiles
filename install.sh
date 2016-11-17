@@ -18,21 +18,21 @@ defaults write -g ApplePressAndHoldEnabled -bool false
 # INSTALLS #
 ############
 
-# Install Homebrew
-ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" ||:
-
-# Install command line apps
-brew install bash bash-completion git haskell-stack node python3
-
-# Install GUI apps
-brew cask install atom docker firefox flux google-chrome google-drive skype sublime-text transmission vlc
-
-# Install Fira Code font
-brew tap caskroom/fonts
-brew cask install font-fira-code
-
 # Xcode tools
 xcode-select --install ||:
+
+# Homebrew
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" ||:
+
+# Command line apps
+brew install bash bash-completion git haskell-stack node python3
+
+# GUI apps
+brew cask install atom docker firefox flux google-chrome google-drive skype sublime-text transmission vlc
+
+# Fira Code font
+brew tap caskroom/fonts
+brew cask install font-fira-code
 
 #############
 # CONFIGURE #
