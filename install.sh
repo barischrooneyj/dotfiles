@@ -48,6 +48,7 @@ apm install \
 
 # Update config files
 filemap=(  # {relative url: absolute path}
+    "atom_config.cson $HOME/.atom/config.cson"
     ".bash_profile $HOME/.bash_profile"
     ".bashrc $HOME/.bashrc"
     "Preferences.sublime-settings \
