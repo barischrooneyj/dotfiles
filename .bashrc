@@ -9,3 +9,4 @@ fi
 
 alias docker-yesod-devel="stack --docker-run-args='--net=bridge --publish=3000:3000' exec -- yesod devel"
 
+export PATH=$PATH:$HOME/.local/bin
