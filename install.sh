@@ -44,8 +44,8 @@ apm install \
     autocomplete-haskell haskell-ghc-mod haskell-pointfree ide-haskell ide-haskell-cabal \
     ide-haskell-repl language-haskell  \
     ask-stack atom-beautify atom-material-ui autocomplete-paths file-icons git-plus minimap \
-    minimap-find-and-replace minimap-highlight-selected pigments run-command script \
-    sublime-style-column-selection vim-mode
+    minimap-find-and-replace minimap-highlight-selected pigments project-manager run-command \
+    script sublime-style-column-selection vim-mode
 # Config file set below
 
 # Update config files
