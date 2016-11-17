@@ -40,10 +40,13 @@ xcode-select --install ||:
 # ATOM
 stack install ghc-mod hlint stylish-haskell
 apm install \
+    # Haskell
     autocomplete-haskell haskell-ghc-mod haskell-pointfree ide-haskell ide-haskell-cabal \
-    ide-haskell-repl language-haskel  \
-    ask-stack atom-beautify autocomplete-paths file-icons git-plus minimap minimap-find-and-replace \
-    minimap-highlight-selected pigments run-command script sublime-style-column-selection vim-mode
+    ide-haskell-repl language-haskell  \
+    # Other
+    ask-stack atom-beautify atom-material-ui autocomplete-paths file-icons git-plus minimap \
+    minimap-find-and-replace minimap-highlight-selected pigments run-command script \
+    sublime-style-column-selection vim-mode
 # Config file set below
 
 # Update config files
