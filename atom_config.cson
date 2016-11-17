@@ -1,0 +1,21 @@
+"*":
+  core:
+    telemetryConsent: "no"
+    themes: [
+      "atom-material-ui"
+      "base16-tomorrow-dark-theme"
+    ]
+  editor:
+    fontFamily: "Fira Code"
+    invisibles: {}
+    scrollPastEnd: true
+    tabLength: 4
+    tabType: "soft"
+  "haskell-ghc-mod":
+    onChangeCheck: true
+    onChangeLint: true
+    onSelectionShow: "typeAndInfo"
+  "ide-haskell":
+    onSavePrettify: true
+  welcome:
+    showOnStartup: false
