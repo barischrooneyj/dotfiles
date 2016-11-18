@@ -12,8 +12,6 @@
     tabLength: 4
     tabType: "soft"
   "haskell-ghc-mod":
-    onChangeCheck: true
-    onChangeLint: true
     onSelectionShow: "typeAndInfo"
   "ide-haskell":
     onSavePrettify: true
