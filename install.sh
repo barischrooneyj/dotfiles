@@ -1,9 +1,5 @@
 set -eou pipefail
 
-######
-# OS #
-######
-
 # Configure dock
 defaults write com.apple.dock autohide -bool true
 defaults write com.apple.dock orientation -string left
@@ -13,10 +9,6 @@ killall Dock
 # Speed up cursor
 defaults write -g KeyRepeat -int 1
 defaults write -g ApplePressAndHoldEnabled -bool false
-
-############
-# INSTALLS #
-############
 
 # Xcode tools
 xcode-select --install ||:
@@ -34,19 +26,12 @@ brew cask install atom docker firefox flux google-chrome google-drive skype subl
 brew tap caskroom/fonts
 brew cask install font-fira-code
 
-#############
-# CONFIGURE #
-#############
-
-# ATOM
-stack install ghc-mod hlint stylish-haskell
-apm install \
-    autocomplete-haskell haskell-ghc-mod haskell-pointfree ide-haskell ide-haskell-cabal \
-    language-haskell  \
-    ask-stack atom-beautify atom-material-ui autocomplete-paths file-icons git-plus minimap \
-    minimap-find-and-replace minimap-highlight-selected pigments project-manager \
-    script sublime-style-column-selection vim-mode
-# Config file set below
+# Spacemacs
+rm -rf ~/.*emacs*
+brew tap railwaycat/emacsmacport
+brew cask install emacs-mac
+git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+stack install apply-refact hlint stylish-haskell hasktags hoogle intero
 
 # Update config files
 filemap=(  # {relative url: absolute path}
@@ -78,10 +63,6 @@ while true; do
             "${HOME}/Documents/${user_repo[0]}_${user_repo[1]}" ||:
     fi
 done
-
-############
-# RUN LAST #
-############
 
 # Open apps
 open /Applications/Flux.app
