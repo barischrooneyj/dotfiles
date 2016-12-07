@@ -35,9 +35,9 @@ stack install apply-refact hlint stylish-haskell hasktags hoogle intero
 
 # Update config files
 filemap=(  # {relative url: absolute path}
-    "atom_config.cson $HOME/.atom/config.cson"
     ".bash_profile $HOME/.bash_profile"
     ".bashrc $HOME/.bashrc"
+    ".spacemacs $HOME/.spacemacs"
     "Preferences.sublime-settings \
         $HOME/Library/Application\ Support/Sublime\ Text\ 3/Packages/User/Preferences.sublime-settings"
 )
