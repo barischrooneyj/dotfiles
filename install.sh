@@ -16,8 +16,8 @@ xcode-select --install ||:
 # Homebrew
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" ||:
 
-# Command line apps
-brew install bash bash-completion git haskell-stack node python3
+# CLI apps
+brew install bash bash-completion git haskell-stack koekeishiya/khd/khd kwm node python3
 
 # GUI apps
 brew cask install atom docker firefox flux google-chrome google-drive skype sublime-text transmission vlc
@@ -33,6 +33,8 @@ brew cask install emacs-mac
 git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
 stack install apply-refact hlint stylish-haskell hasktags hoogle intero
 
+# mkdirs for configs
+mkdir "$HOME/.kwm/kwmrc"
 # Update config files
 filemap=(  # {relative url: absolute path}
     ".bash_profile $HOME/.bash_profile"
@@ -40,6 +42,8 @@ filemap=(  # {relative url: absolute path}
     ".spacemacs $HOME/.spacemacs"
     "Preferences.sublime-settings \
         $HOME/Library/Application\ Support/Sublime\ Text\ 3/Packages/User/Preferences.sublime-settings"
+    ".khdrc $HOME/.khdrc"
+    ".kwm/kwmrc $HOME/.kwm/kwmrc"
 )
 for line in "${filemap[@]}"; do
     read src_path dest_path <<< $line
@@ -49,6 +53,15 @@ for line in "${filemap[@]}"; do
     mkdir -p "$(dirname "$dest_path")"
     echo "$src_file" > "$dest_path"
 done
+
+# Source before we run things
+source ~/.bashrc
+
+# Set paths
+launchctl setenv PATH $PATH
+
+# Start services
+brew services start khd kwh
 
 # Clone GitHub repos
 msg='Enter GitHub repo to clone e.g. barischj/dotfiles or return to continue: '
