@@ -8,3 +8,4 @@ if [ -f $(brew --prefix)/etc/bash_completion ]; then
 fi
 
 export PATH=$PATH:$HOME/.local/bin
+PS1='> '
