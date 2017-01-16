@@ -55,15 +55,16 @@ done
 # Source before we run things
 source ~/.bashrc
 
-# Open apps
-open /Applications/Flux.app
-open /Applications/Google\ Drive.app
-
 # Change shell to bash 4
 usr_bash='/usr/local/bin/bash'
 shells='/etc/shells'
 grep -qF $usr_bash $shells || \
     ( echo "Appending $usr_bash to $shells" && \
       echo $usr_bash | sudo tee -a $shells )
-grep -qF $usr_bash <<< $SHELL || chsh -s $usr_bash
-echo "Open new shell for updated bash"
+grep -qF $usr_bash <<< $SHELL || \
+    ( chsh -s $usr_bash && \
+      echo "Open new shell for updated bash" )
+
+# Open apps
+open /Applications/Flux.app
+open /Applications/Google\ Drive.app
