@@ -5,7 +5,7 @@ alias vi="vim"
 export CLICOLOR=1
 export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
 export PATH=$PATH:$HOME/.local/bin
-export PS1="\e[0;31m𝝺\e[m "  # red lambda
+export PS1="𝝺 "
 
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
   . $(brew --prefix)/etc/bash_completion
