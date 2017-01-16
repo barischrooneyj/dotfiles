@@ -32,6 +32,7 @@ brew tap d12frosted/emacs-plus
 brew install emacs-plus
 brew linkapps emacs-plus
 git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+stack setup
 stack install apply-refact hlint stylish-haskell hasktags hoogle intero
 
 # Update config files
