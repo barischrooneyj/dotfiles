@@ -20,7 +20,7 @@ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/
 brew install bash bash-completion git haskell-stack node python3
 
 # GUI apps
-brew cask install docker firefox flux google-chrome google-drive skype sublime-text transmission vlc
+brew cask install docker firefox flux google-chrome google-drive iterm skype sublime-text transmission vlc
 
 # Fira Code font
 brew tap caskroom/fonts
