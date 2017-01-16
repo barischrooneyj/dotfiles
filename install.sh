@@ -34,9 +34,6 @@ brew linkapps emacs-plus
 git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
 stack install apply-refact hlint stylish-haskell hasktags hoogle intero
 
-# mkdirs for configs
-mkdir "$HOME/.kwm/kwmrc"
-
 # Update config files
 filemap=(  # {relative url: absolute path}
     ".bash_profile $HOME/.bash_profile"
@@ -44,8 +41,6 @@ filemap=(  # {relative url: absolute path}
     ".spacemacs $HOME/.spacemacs"
     "Preferences.sublime-settings \
         $HOME/Library/Application\ Support/Sublime\ Text\ 3/Packages/User/Preferences.sublime-settings"
-    ".khdrc $HOME/.khdrc"
-    ".kwm/kwmrc $HOME/.kwm/kwmrc"
 )
 for line in "${filemap[@]}"; do
     read src_path dest_path <<< $line
@@ -61,23 +56,6 @@ source ~/.bashrc
 
 # Set paths
 launchctl setenv PATH $PATH
-
-# Start services
-brew services start khd kwh
-
-# Clone GitHub repos
-msg='Enter GitHub repo to clone e.g. barischj/dotfiles or return to continue: '
-while true; do
-    read -p "$msg" input
-    if [[ "$input" = "" ]]; then break; fi
-    user_repo=($(echo "$input" | tr "/" " "))
-    if (( ${#user_repo[@]} != 2 )); then
-        echo "Input format incorrect";
-    else
-        git clone "https://github.com/${user_repo[0]}/${user_repo[1]}" \
-            "${HOME}/Documents/${user_repo[0]}_${user_repo[1]}" ||:
-    fi
-done
 
 # Open apps
 open /Applications/Flux.app
