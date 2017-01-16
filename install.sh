@@ -66,5 +66,4 @@ grep -qF $usr_bash <<< $SHELL || \
 open /Applications/Flux.app
 open /Applications/Google\ Drive.app
 
-source ~/.bashrc
-echo "Log out and in for some changes to take effect"
+echo "Log out and in for all changes to take effect"
