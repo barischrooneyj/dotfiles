@@ -20,7 +20,7 @@ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/
 brew install bash bash-completion git haskell-stack koekeishiya/khd/khd kwm node python3
 
 # GUI apps
-brew cask install atom docker firefox flux google-chrome google-drive skype sublime-text transmission vlc
+brew cask install docker firefox flux google-chrome google-drive skype sublime-text transmission vlc
 
 # Fira Code font
 brew tap caskroom/fonts
@@ -28,13 +28,15 @@ brew cask install font-fira-code
 
 # Spacemacs
 rm -rf ~/.*emacs*
-brew tap railwaycat/emacsmacport
-brew cask install emacs-mac
+brew tap d12frosted/emacs-plus
+brew install emacs-plus
+brew linkapps emacs-plus
 git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
 stack install apply-refact hlint stylish-haskell hasktags hoogle intero
 
 # mkdirs for configs
 mkdir "$HOME/.kwm/kwmrc"
+
 # Update config files
 filemap=(  # {relative url: absolute path}
     ".bash_profile $HOME/.bash_profile"
