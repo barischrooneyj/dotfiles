@@ -52,9 +52,6 @@ for line in "${filemap[@]}"; do
     echo "$src_file" > "$dest_path"
 done
 
-# Source before we run things
-source ~/.bashrc
-
 # Change shell to bash 4
 usr_bash='/usr/local/bin/bash'
 shells='/etc/shells'
@@ -68,3 +65,6 @@ grep -qF $usr_bash <<< $SHELL || \
 # Open apps
 open /Applications/Flux.app
 open /Applications/Google\ Drive.app
+
+source ~/.bashrc
+echo "Log out and in for some changes to take effect"
