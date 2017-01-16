@@ -17,7 +17,7 @@ xcode-select --install ||:
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" ||:
 
 # CLI apps
-brew install bash bash-completion git haskell-stack koekeishiya/khd/khd kwm node python3
+brew install bash bash-completion git haskell-stack node python3
 
 # GUI apps
 brew cask install docker firefox flux google-chrome google-drive skype sublime-text transmission vlc
