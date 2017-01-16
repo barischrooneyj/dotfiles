@@ -55,9 +55,6 @@ done
 # Source before we run things
 source ~/.bashrc
 
-# Set paths
-launchctl setenv PATH $PATH
-
 # Open apps
 open /Applications/Flux.app
 open /Applications/Google\ Drive.app
