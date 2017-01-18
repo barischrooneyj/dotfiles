@@ -50,7 +50,7 @@ values."
      syntax-checking
      version-control
      ;; User added.
-     haskell
+     (haskell :variables haskell-completion-backend 'intero)
      osx
      )
    ;; List of additional packages that will be installed without being
