@@ -28,8 +28,8 @@ brew cask install font-fira-code
 
 # Spacemacs
 rm -rf ~/.*emacs*
-brew tap railwaycat/emacsmacport
-brew cask install emacs-mac
+brew tap d12frosted/emacs-plus
+brew install emacs-plus
 git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
 stack setup
 stack install apply-refact hlint stylish-haskell hasktags hoogle intero
