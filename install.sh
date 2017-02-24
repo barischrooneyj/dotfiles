@@ -1,3 +1,5 @@
+#!/bin/bash
+
 set -eou pipefail
 
 # Configure dock
@@ -16,10 +18,8 @@ xcode-select --install ||:
 # Homebrew
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" ||:
 
-# CLI apps
+# Vanilla Homebrew installs
 brew install bash bash-completion git haskell-stack node python3
-
-# GUI apps
 brew cask install docker firefox flux google-chrome google-drive iterm2 skype sublime-text transmission vlc
 
 # Fira Code font
@@ -31,6 +31,7 @@ rm -rf ~/.*emacs*
 brew tap d12frosted/emacs-plus
 brew install emacs-plus
 git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+# Haskell layer deps
 stack setup
 stack install apply-refact hlint stylish-haskell hasktags hoogle intero
 
@@ -50,6 +51,12 @@ for line in "${filemap[@]}"; do
     mkdir -p "$(dirname "$dest_path")"
     echo "$src_file" > "$dest_path"
 done
+
+# Change default apps
+brew install duti
+duti -s org.videolan.vlc mkv all
+duti -s org.videolan.vlc m4a all
+duti -s org.videolan.vlc mp4 all
 
 # Change shell to bash 4
 usr_bash='/usr/local/bin/bash'
