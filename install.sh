@@ -20,6 +20,7 @@ brew install bash bash-completion git haskell-stack mas node python3
 brew cask install docker firefox flux google-chrome google-drive iterm2 skype sublime-text transmission vlc
 
 # App Store installs
+mas signin --dialog barischj@tcd.ie ||:
 mas install `mas search XCode | head -n 1 | cut -f 1 -d ' '`
 # Xcode tools
 # xcode-select --install ||:
