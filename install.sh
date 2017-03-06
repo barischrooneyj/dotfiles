@@ -21,7 +21,9 @@ brew cask install docker firefox flux google-chrome google-drive iterm2 skype su
 
 # App Store installs
 mas signin --dialog barischj@tcd.ie ||:
-mas install `mas search XCode | head -n 1 | cut -f 1 -d ' '`
+# Xcode
+mas install `mas search Xcode | head -n 1 | cut -f 1 -d ' '`
+sudo xcodebuild -license accept
 # Xcode tools
 # xcode-select --install ||:
 
