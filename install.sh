@@ -15,9 +15,9 @@ defaults write -g ApplePressAndHoldEnabled -bool false
 # Homebrew
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" ||:
 
-# Vanilla Homebrew installs
+# Homebrew installs
 brew install bash bash-completion git haskell-stack mas node python3
-brew cask install docker firefox flux google-chrome google-drive iterm2 skype sublime-text transmission vlc
+brew cask install docker firefox flux franz google-chrome google-drive iterm2 skype sublime-text transmission vlc
 
 # App Store installs
 mas signin --dialog barischj@tcd.ie ||:
