@@ -73,6 +73,10 @@ grep -qF $usr_bash <<< $SHELL || \
     ( chsh -s $usr_bash && \
       echo "Open new shell for updated bash" )
 
+# Cleanup
+brew cleanup
+brew cask cleanup
+
 # Open apps
 open /Applications/Flux.app
 open /Applications/Google\ Chrome.app
