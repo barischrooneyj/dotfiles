@@ -72,6 +72,7 @@ grep -qF $usr_bash <<< $SHELL || \
 
 # Open apps
 open /Applications/Flux.app
+open /Applications/Google\ Chrome.app
 open /Applications/Google\ Drive.app
 
-echo "Log out and in for all changes to take effect"
+softwareupdate --install --all
