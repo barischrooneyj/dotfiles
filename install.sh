@@ -12,15 +12,17 @@ killall Dock
 defaults write -g KeyRepeat -int 1
 defaults write -g ApplePressAndHoldEnabled -bool false
 
-# Xcode tools
-xcode-select --install ||:
-
 # Homebrew
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" ||:
 
 # Vanilla Homebrew installs
-brew install bash bash-completion git haskell-stack node python3
+brew install bash bash-completion git haskell-stack mas node python3
 brew cask install docker firefox flux google-chrome google-drive iterm2 skype sublime-text transmission vlc
+
+# App Store installs
+mas install `mas search XCode | head -n 1 | cut -f 1 -d ' '`
+# Xcode tools
+# xcode-select --install ||:
 
 # Fira Code font
 brew tap caskroom/fonts
