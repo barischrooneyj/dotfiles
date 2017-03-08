@@ -305,10 +305,13 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
+  ;; https://github.com/syl20bnr/spacemacs/tree/master/layers/%2Blang/javascript#indentation
   ;; https://github.com/syl20bnr/spacemacs/tree/master/layers/%2Bframeworks/react#optional-configuration
   (setq-default
    ;; js2-mode
    js2-basic-offset 2
+   ;; js-mode
+   js-indent-level 2
    ;; web-mode
    css-indent-offset 2
    web-mode-markup-indent-offset 2
@@ -317,6 +320,8 @@ you should place your code here."
    web-mode-attr-indent-offset 2)
   ;; Org LaTeX compiler that comes with MacTeX.
   (setq org-latex-compiler "xelatex")
+  ;; https://github.com/syl20bnr/spacemacs/tree/master/layers/%2Bos/osx#use-with-non-us-keyboard-layouts
+  (setq-default mac-right-option-modifier nil)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
