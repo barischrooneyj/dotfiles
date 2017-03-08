@@ -36,9 +36,18 @@ rm -rf ~/.*emacs*
 brew tap d12frosted/emacs-plus
 brew install emacs-plus
 git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
-# Haskell layer deps
+# haskell layer
 stack setup
 stack install apply-refact hlint stylish-haskell hasktags hoogle intero
+# javascript layer
+npm install -g eslint js-beautify tern
+npm install -g eslint babel-eslint eslint-plugin-react
+# python layer
+pip install --upgrade "jedi>=0.9.0" "json-rpc>=1.8.1" "service_factory>=0.1.5"
+PYTHONPATH=$HOME/.emacs.d/.cache/anaconda-mode/0.1.7 easy_install -d $HOME/.emacs.d/.cache/anaconda-mode/0.1.7 -S $HOME/.emacs.d/.cache/anaconda-mode/0.1.7 -a -Z jedi
+pip install autoflake flake8 hy
+# react layer
+npm install -g babel-eslint eslint eslint-plugin-react js-beautify tern
 
 # Update config files
 filemap=(  # {relative url: absolute path}
