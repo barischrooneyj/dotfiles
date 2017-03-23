@@ -21,11 +21,8 @@ brew cask install docker firefox flux franz google-chrome google-drive iterm2 sk
 
 # App Store installs
 mas signin --dialog barischj@tcd.ie ||:
-## Xcode
 mas install `mas search Xcode | head -n 1 | cut -f 1 -d ' '`
 sudo xcodebuild -license accept
-# Xcode tools
-# xcode-select --install ||:
 
 # Fira Code font
 brew tap caskroom/fonts
@@ -37,16 +34,10 @@ brew tap d12frosted/emacs-plus
 brew install emacs-plus
 git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
 ## haskell layer
-stack setup
-stack install apply-refact hlint stylish-haskell hasktags hoogle intero
+stack install --install-ghc apply-refact hlint stylish-haskell hasktags hoogle intero
 ## javascript layer
 npm install -g eslint js-beautify tern
-npm install -g eslint babel-eslint eslint-plugin-react
 ## python layer
-### https://github.com/syl20bnr/spacemacs/tree/master/layers/%2Blang/python#auto-completion-anaconda-dependencies
-pip install --upgrade "jedi>=0.9.0" "json-rpc>=1.8.1" "service_factory>=0.1.5"
-### https://github.com/syl20bnr/spacemacs/issues/8412
-PYTHONPATH=$HOME/.emacs.d/.cache/anaconda-mode/0.1.7 easy_install -d $HOME/.emacs.d/.cache/anaconda-mode/0.1.7 -S $HOME/.emacs.d/.cache/anaconda-mode/0.1.7 -a -Z jedi
 pip install autoflake flake8 hy
 ## react layer
 npm install -g babel-eslint eslint eslint-plugin-react js-beautify tern
@@ -78,8 +69,7 @@ duti -s org.videolan.vlc mp4 all
 usr_bash='/usr/local/bin/bash'
 shells='/etc/shells'
 grep -qF $usr_bash $shells || \
-    ( echo "Appending $usr_bash to $shells" && \
-      echo $usr_bash | sudo tee -a $shells )
+      echo $usr_bash | sudo tee -a $shells
 grep -qF $usr_bash <<< $SHELL || \
     ( chsh -s $usr_bash && \
       echo "Open new shell for updated bash" )
@@ -93,4 +83,21 @@ open /Applications/Flux.app
 open /Applications/Google\ Chrome.app
 open /Applications/Google\ Drive.app
 
+# Install all "appropriate" updates
 softwareupdate --install --all
+
+# Bug Fixes
+
+echo << EOM
+-- because of --
+https://github.com/syl20bnr/spacemacs/tree/master/layers/%2Blang/python#auto-completion-anaconda-dependencies'
+-- do --
+pip install --upgrade "jedi>=0.9.0" "json-rpc>=1.8.1" "service_factory>=0.1.5"
+EOM
+
+echo << EOM
+-- because of --
+https://github.com/syl20bnr/spacemacs/issues/8412
+-- do --
+PYTHONPATH=$HOME/.emacs.d/.cache/anaconda-mode/0.1.7 easy_install -d $HOME/.emacs.d/.cache/anaconda-mode/0.1.7 -S $HOME/.emacs.d/.cache/anaconda-mode/0.1.7 -a -Z jedi
+EOM
