@@ -322,6 +322,8 @@ you should place your code here."
   (setq org-latex-compiler "xelatex")
   ;; https://github.com/syl20bnr/spacemacs/tree/master/layers/%2Bos/osx#use-with-non-us-keyboard-layouts
   (setq-default mac-right-option-modifier nil)
+  ;; Deal with the simple UTF-8 arrows.
+  (setq powerline-default-separator 'utf-8)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
