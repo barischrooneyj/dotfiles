@@ -324,6 +324,22 @@ you should place your code here."
   (setq-default mac-right-option-modifier nil)
   ;; Deal with the simple UTF-8 arrows.
   (setq powerline-default-separator 'utf-8)
+  ;; LaTeX Back-End for Org Export Engine.
+  (require 'ox-latex)
+  ;; Use the minted package to export source code.
+  ;; This fixes any syntax highlighting problems.
+  (add-to-list 'org-latex-packages-alist '("" "minted"))
+  (setq org-latex-listings 'minted)
+  ;; The command to run when building a PDF.
+  (setq org-latex-pdf-process
+    '("xelatex -shell-escape -interaction nonstopmode %f"
+      "bibtex %b"
+      "xelatex -shell-escape -interaction nonstopmode %f"))
+
+  ;; Some extras for Org Export Engine.
+  (require 'ox-extra)
+  ;; Allow us to ignore headings with the ignore tag.
+  (ox-extras-activate '(ignore-headlines))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
