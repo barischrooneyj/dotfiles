@@ -318,9 +318,7 @@ you should place your code here."
    web-mode-css-indent-offset 2
    web-mode-code-indent-offset 2
    web-mode-attr-indent-offset 2)
-  ;; Org LaTeX compiler that comes with MacTeX.
-  (setq org-latex-compiler "xelatex")
-  ;; https://github.com/syl20bnr/spacemacs/tree/master/layers/%2Bos/osx#use-with-non-us-keyboard-layouts
+  ;; Allow us to use right-option key as usual.
   (setq-default mac-right-option-modifier nil)
   ;; Deal with the simple UTF-8 arrows.
   (setq powerline-default-separator 'utf-8)
@@ -335,7 +333,6 @@ you should place your code here."
     '("xelatex -shell-escape -interaction nonstopmode %f"
       "bibtex %b"
       "xelatex -shell-escape -interaction nonstopmode %f"))
-
   ;; Some extras for Org Export Engine.
   (require 'ox-extra)
   ;; Allow us to ignore headings with the ignore tag.
