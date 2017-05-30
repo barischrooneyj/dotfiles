@@ -17,7 +17,7 @@ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/
 
 # Homebrew installs
 brew install bash bash-completion@2 git-flow-avh haskell-stack mas node python3
-brew cask install docker firefox flux franz google-chrome google-drive iterm2 spotify transmission vlc
+brew cask install firefox flux franz google-chrome google-drive iterm2 spotify transmission vlc
 
 # App Store installs
 mas signin --dialog barischj@tcd.ie ||:
