@@ -12,17 +12,24 @@ killall Dock
 defaults write -g KeyRepeat -int 1
 defaults write -g ApplePressAndHoldEnabled -bool false
 
+# Xcode command line tools
+xcode-select --install ||:
+ 
 # Homebrew
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" ||:
 
 # Homebrew installs
 brew install bash bash-completion@2 git-flow-avh haskell-stack mas node python3
-brew cask install firefox flux franz google-chrome google-drive iterm2 spotify transmission vlc
+brew cask install firefox flux franz google-chrome google-drive iterm2 spotify sublime-text transmission vlc
 
-# App Store installs
-mas signin --dialog barischj@tcd.ie ||:
-mas install `mas search Xcode | head -n 1 | cut -f 1 -d ' '`
-sudo xcodebuild -license accept
+# Xcode
+read -p $'Install Xcode?\n' -n 1
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]
+    mas signin --dialog barischj@tcd.ie ||:
+    mas install `mas search Xcode | head -n 1 | cut -f 1 -d ' '`
+    sudo xcodebuild -license accept
+fi
 
 # Fira Code font
 brew tap caskroom/fonts
@@ -78,7 +85,7 @@ open /Applications/Google\ Drive.app
 softwareupdate --install --all
 
 # Bug fixes
-echo << EOM
+cat << EOM
 For anaconda-mode errors see:
 https://github.com/syl20bnr/spacemacs/tree/master/layers/%2Blang/python#auto-completion-anaconda-dependencies
 https://github.com/syl20bnr/spacemacs/issues/8412
