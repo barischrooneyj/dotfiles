@@ -40,13 +40,13 @@ rm -rf ~/.*emacs*
 brew tap d12frosted/emacs-plus
 brew install emacs-plus
 git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
-## haskell layer
+## haskell layer deps
 stack install --install-ghc apply-refact hlint stylish-haskell hasktags hoogle intero
-## javascript layer
+## javascript layer deps
 npm install -g eslint js-beautify tern
-## python layer
+## python layer deps
 pip install autoflake flake8 hy
-## react layer
+## react layer deps
 npm install -g babel-eslint eslint eslint-plugin-react js-beautify tern
 
 # Update config files
@@ -72,14 +72,14 @@ duti -s org.videolan.vlc mkv all
 duti -s org.videolan.vlc m4a all
 duti -s org.videolan.vlc mp4 all
 
-# Cleanup
-brew cleanup
-brew cask cleanup
-
 # Open apps
 open /Applications/Flux.app
 open /Applications/Google\ Chrome.app
 open /Applications/Google\ Drive.app
+
+# Cleanup
+brew cleanup
+brew cask cleanup
 
 # Install all "appropriate" updates
 softwareupdate --install --all
