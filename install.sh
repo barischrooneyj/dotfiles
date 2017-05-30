@@ -65,15 +65,6 @@ duti -s org.videolan.vlc mkv all
 duti -s org.videolan.vlc m4a all
 duti -s org.videolan.vlc mp4 all
 
-# Change shell to bash 4
-usr_bash='/usr/local/bin/bash'
-shells='/etc/shells'
-grep -qF $usr_bash $shells || \
-      echo $usr_bash | sudo tee -a $shells
-grep -qF $usr_bash <<< $SHELL || \
-    ( chsh -s $usr_bash && \
-      echo "Open new shell for updated bash" )
-
 # Cleanup
 brew cleanup
 brew cask cleanup
