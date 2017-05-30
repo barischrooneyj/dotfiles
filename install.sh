@@ -77,18 +77,9 @@ open /Applications/Google\ Drive.app
 # Install all "appropriate" updates
 softwareupdate --install --all
 
-# Bug Fixes
-
+# Bug fixes
 echo << EOM
--- because of --
-https://github.com/syl20bnr/spacemacs/tree/master/layers/%2Blang/python#auto-completion-anaconda-dependencies'
--- do --
-pip install --upgrade "jedi>=0.9.0" "json-rpc>=1.8.1" "service_factory>=0.1.5"
-EOM
-
-echo << EOM
--- because of --
+For anaconda-mode errors see:
+https://github.com/syl20bnr/spacemacs/tree/master/layers/%2Blang/python#auto-completion-anaconda-dependencies
 https://github.com/syl20bnr/spacemacs/issues/8412
--- do --
-PYTHONPATH=$HOME/.emacs.d/.cache/anaconda-mode/0.1.7 easy_install -d $HOME/.emacs.d/.cache/anaconda-mode/0.1.7 -S $HOME/.emacs.d/.cache/anaconda-mode/0.1.7 -a -Z jedi
 EOM
