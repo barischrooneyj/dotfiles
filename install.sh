@@ -26,6 +26,7 @@ brew cask install firefox flux franz google-chrome google-drive iterm2 spotify s
 read -p $'Install Xcode?\n' -n 1
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]
+then
     mas signin --dialog barischj@tcd.ie ||:
     mas install `mas search Xcode | head -n 1 | cut -f 1 -d ' '`
     sudo xcodebuild -license accept
