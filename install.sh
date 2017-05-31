@@ -69,9 +69,15 @@ done
 
 # Change default apps
 brew install duti
-duti -s org.videolan.vlc mkv all
-duti -s org.videolan.vlc m4a all
-duti -s org.videolan.vlc mp4 all
+defaults=(
+    "m4a org.videolan.vlc"
+    "mkv org.videolan.vlc"
+    "mp4 org.videolan.vlc"
+)
+for line in "${defaults[@]}"; do
+    read format app <<< $line
+    duti -s $app $format all
+done
 
 # Open apps
 open /Applications/Google\ Chrome.app
@@ -83,10 +89,12 @@ brew cask cleanup
 
 # Bug fixes
 cat << EOM
+
 For anaconda-mode errors see:
 https://github.com/syl20bnr/spacemacs/tree/master/layers/%2Blang/python#auto-completion-anaconda-dependencies
 https://github.com/syl20bnr/spacemacs/issues/8412
+
 EOM
 
-# Install all "appropriate" updates
+# Install "all appropriate" updates
 softwareupdate --install --all
