@@ -20,7 +20,7 @@ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/
 
 # Homebrew installs
 brew install bash bash-completion@2 git-flow-avh haskell-stack mas node python3
-brew cask install firefox flux franz google-chrome google-drive iterm2 spotify sublime-text transmission vlc
+brew cask install firefox franz google-chrome google-drive iterm2 spotify sublime-text transmission vlc
 
 # Xcode
 read -p $'Install Xcode?\n' -n 1
@@ -74,7 +74,6 @@ duti -s org.videolan.vlc m4a all
 duti -s org.videolan.vlc mp4 all
 
 # Open apps
-open /Applications/Flux.app
 open /Applications/Google\ Chrome.app
 open /Applications/Google\ Drive.app
 
@@ -82,12 +81,12 @@ open /Applications/Google\ Drive.app
 brew cleanup
 brew cask cleanup
 
-# Install all "appropriate" updates
-softwareupdate --install --all
-
 # Bug fixes
 cat << EOM
 For anaconda-mode errors see:
 https://github.com/syl20bnr/spacemacs/tree/master/layers/%2Blang/python#auto-completion-anaconda-dependencies
 https://github.com/syl20bnr/spacemacs/issues/8412
 EOM
+
+# Install all "appropriate" updates
+softwareupdate --install --all
