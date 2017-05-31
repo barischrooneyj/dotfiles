@@ -80,6 +80,7 @@ for line in "${defaults[@]}"; do
 done
 
 # Open apps
+open -a emacs
 open /Applications/Google\ Chrome.app
 open /Applications/Google\ Drive.app
 
