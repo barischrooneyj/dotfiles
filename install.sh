@@ -28,7 +28,7 @@ brew tap caskroom/fonts
 brew cask install font-fira-code
 
 # Spacemacs
-git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d ||:
 ## haskell layer deps
 stack install --install-ghc apply-refact hlint stylish-haskell hasktags hoogle intero
 ## python layer deps
