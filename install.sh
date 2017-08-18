@@ -32,7 +32,7 @@ brew cask cleanup
 # Spacemacs
 git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d ||:
 ## haskell layer deps
-stack install --install-ghc apply-refact hlint stylish-haskell hasktags hoogle intero
+stack install --install-ghc --resolver=nightly apply-refact hlint stylish-haskell hasktags hoogle intero
 ## python layer deps
 sudo pip3 install autoflake flake8 hy
 
