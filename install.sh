@@ -22,14 +22,12 @@ if hash brew 2>/dev/null; then
 else
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
+brew tap caskroom/fonts
+brew tap caskroom/homebrew-versions
 brew install bash bash-completion@2 duti emacs git-flow-avh haskell-stack ispell python3 tmux
-brew cask install google-backup-and-sync google-chrome iina iterm2 spotify transmission
+brew cask install font-fira-code google-backup-and-sync google-chrome iina iterm2-beta spotify transmission
 brew cleanup
 brew cask cleanup
-
-# Fira Code font
-brew tap caskroom/fonts
-brew cask install font-fira-code
 
 # Spacemacs
 git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d ||:
@@ -38,23 +36,25 @@ stack install --install-ghc apply-refact hlint stylish-haskell hasktags hoogle i
 ## python layer deps
 sudo pip3 install autoflake flake8 hy
 
-# Update config files
-filemap=(  # {relative url: absolute path}
-    ".bash_profile $HOME/.bash_profile"
-    ".bashrc $HOME/.bashrc"
-    ".spacemacs $HOME/.spacemacs"
+# Set dotfiles
+filemap=(
+    ".bash_profile"
+    ".bashrc"
+    ".spacemacs"
+    ".tmux.conf"
 )
-for line in "${filemap[@]}"; do
-    read src_path dest_path <<< $line
-    url="https://raw.githubusercontent.com/barischj/dotfiles/master/$src_path"
+for name in "${filemap[@]}"; do
+    url="https://raw.githubusercontent.com/barischj/dotfiles/master/$name"
     src_file="$(curl -fsSL $url)"
-    echo "Setting $dest_path from $url"
+    echo "Setting $name from $url"
+    dest_path="$HOME/$name"
     mkdir -p "$(dirname "$dest_path")"
     echo "$src_file" > "$dest_path"
 done
 
-# Change default apps
+# Set default apps
 defaults=(
+    "avi com.colliderli.iina"
     "m4a com.colliderli.iina"
     "mkv com.colliderli.iina"
     "mp4 com.colliderli.iina"
