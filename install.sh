@@ -17,7 +17,11 @@ defaults write -g ApplePressAndHoldEnabled -bool false
 xcode-select --install ||:
  
 # Homebrew
-ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" ||:
+if hash brew 2>/dev/null; then
+  echo 'brew already installed'
+else
+  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+fi
 brew install bash bash-completion@2 duti emacs git-flow-avh haskell-stack ispell python3 tmux
 brew cask install google-backup-and-sync google-chrome iina iterm2 spotify transmission
 brew cleanup
@@ -32,7 +36,7 @@ git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d ||:
 ## haskell layer deps
 stack install --install-ghc apply-refact hlint stylish-haskell hasktags hoogle intero
 ## python layer deps
-pip install autoflake flake8 hy
+sudo pip3 install autoflake flake8 hy
 
 # Update config files
 filemap=(  # {relative url: absolute path}
