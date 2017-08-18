@@ -2,7 +2,6 @@ alias c="clear"
 alias ls="ls -ahGF"
 alias vi="vim"
 alias doco="docker-compose"
-alias sack='stack'
 
 export CLICOLOR=1
 export LSCOLORS=GxFxBxDxCxegedabagacad
