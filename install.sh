@@ -23,9 +23,8 @@ else
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 brew tap caskroom/fonts
-brew tap caskroom/homebrew-versions
-brew install bash bash-completion@2 duti emacs git-flow-avh haskell-stack ispell python3 tmux
-brew cask install font-fira-code google-backup-and-sync google-chrome iina iterm2-beta spotify transmission
+brew install bash bash-completion@2 duti haskell-stack ispell python3 tmux
+brew cask install emacs font-fira-code google-backup-and-sync google-chrome iina iterm2 spotify transmission
 brew cleanup
 brew cask cleanup
 
