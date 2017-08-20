@@ -12,4 +12,4 @@ fi
 
 export PS1="\e[35;1m\u\e[m in \e[33;1m\w\e[m \n🌻  "
 
-[[ -z ${TMUX+x} ]] && exec tmux
+[[ -z ${TMUX+x} ]] && ( tmux a || tmux )
