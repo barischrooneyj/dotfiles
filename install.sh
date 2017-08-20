@@ -20,7 +20,7 @@ else
 fi
 brew tap caskroom/fonts
 brew install bash bash-completion@2 duti haskell-stack ispell python3 tmux
-brew cask install emacs font-fira-code google-backup-and-sync google-chrome iina iterm2 spotify transmission
+brew cask install emacs flux font-fira-code google-backup-and-sync google-chrome iina iterm2 spotify transmission
 brew cleanup
 brew cask cleanup
 
