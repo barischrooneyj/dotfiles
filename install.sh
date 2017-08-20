@@ -11,10 +11,6 @@ killall Dock
 # Speed up cursor
 defaults write -g KeyRepeat -int 1
 defaults write -g ApplePressAndHoldEnabled -bool false
-
-# Xcode command line tools
-# TODO: Possibly covered by installing brew
-xcode-select --install ||:
  
 # Homebrew
 if hash brew 2>/dev/null; then
@@ -59,8 +55,8 @@ defaults=(
     "mp4 com.colliderli.iina"
 )
 for line in "${defaults[@]}"; do
-    read format app <<< $line
-    duti -s $app $format all
+    read format app <<< "$line"
+    duti -s "$app" "$format" all
 done
 
 # Open apps
@@ -68,7 +64,12 @@ open -a backup\ and\ sync
 open -a flux
 
 # Final steps
-echo 'Remaining issues: https://github.com/barischrooneyj/dotfiles/issues'
+cat << EOM
+
+Remaining issues: https://github.com/barischrooneyj/dotfiles/issues
+Reboot once updates are installed.
+
+EOM
 
 # Install "all appropriate" updates
 softwareupdate --install --all
