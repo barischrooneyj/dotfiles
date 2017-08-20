@@ -1,4 +1,4 @@
 bashrc_path="$HOME/.bashrc"
 if [[ -f $bashrc_path ]]; then
-    source $bashrc_path
+  . $bashrc_path
 fi
