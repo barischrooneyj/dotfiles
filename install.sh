@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -eou pipefail
+set -euo pipefail
 
 # Configure dock
 defaults write com.apple.dock autohide -bool true
@@ -26,6 +26,7 @@ brew cask cleanup
 
 # Spacemacs
 git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d ||:
+( cd ~/.emacs.d ; git checkout develop ) # development Spacemacs!
 ## haskell layer deps
 stack install --install-ghc --resolver=nightly apply-refact hlint stylish-haskell hasktags hoogle intero
 ## python layer deps
@@ -63,11 +64,17 @@ done
 open -a backup\ and\ sync
 open -a flux
 
-# Final steps
+# Final instructions
 cat << EOM
 
-Remaining issues: https://github.com/barischrooneyj/dotfiles/issues
-Reboot once updates are installed.
+* Verify 'codesign -dvv /Applications/Emacs.app' contains:
+Authority=Developer ID Application: Galvanix
+Authority=Developer ID Certification Authority
+Authority=Apple Root CA
+
+* Remaining issues: https://github.com/barischrooneyj/dotfiles/issues
+
+* Reboot once updates are installed.
 
 EOM
 
