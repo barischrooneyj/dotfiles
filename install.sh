@@ -26,7 +26,6 @@ brew cask cleanup
 
 # Spacemacs
 git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d ||:
-( cd ~/.emacs.d ; git checkout develop ) # development Spacemacs!
 ## haskell layer deps
 stack install --install-ghc --resolver=nightly apply-refact hlint stylish-haskell hasktags hoogle intero
 ## python layer deps
