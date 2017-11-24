@@ -24,6 +24,9 @@ brew cask install emacs flux font-fira-code google-backup-and-sync google-chrome
 brew cleanup
 brew cask cleanup
 
+# Transmission-rss.
+gem install transmission-rss
+
 # Spacemacs
 git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d ||:
 ## haskell layer deps
@@ -37,6 +40,8 @@ filemap=(
     ".bashrc"
     ".spacemacs"
     ".tmux.conf"
+    "supervisord.conf"
+    ".config/transmission-rss/config.yml"
 )
 for name in "${filemap[@]}"; do
     url="https://raw.githubusercontent.com/barischj/dotfiles/master/$name"
