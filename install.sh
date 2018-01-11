@@ -20,7 +20,7 @@ else
 fi
 brew tap caskroom/fonts
 brew install bash bash-completion@2 duti haskell-stack ispell python3 reattach-to-user-namespace tmux
-brew cask install emacs flux font-fira-code google-backup-and-sync google-chrome iina iterm2 spotify transmission
+brew cask install flux font-fira-code google-backup-and-sync google-chrome iina iterm2 spotify transmission
 brew cleanup
 brew cask cleanup
 
@@ -28,6 +28,8 @@ brew cask cleanup
 gem install transmission-rss
 
 # Spacemacs
+brew tap d12frosted/emacs-plus
+brew install emacs-plus --with-24bit-color --with-natural-title-bar
 git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d ||:
 ## haskell layer deps
 stack install --install-ghc --resolver=nightly apply-refact hlint stylish-haskell hasktags hoogle intero
@@ -70,11 +72,6 @@ open -a flux
 
 # Final instructions
 cat << EOM
-
-* Verify 'codesign -dvv /Applications/Emacs.app' contains:
-Authority=Developer ID Application: Galvanix
-Authority=Developer ID Certification Authority
-Authority=Apple Root CA
 
 * Remaining issues: https://github.com/barischrooneyj/dotfiles/issues
 
