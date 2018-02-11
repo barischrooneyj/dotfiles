@@ -14,27 +14,23 @@ defaults write -g ApplePressAndHoldEnabled -bool false
  
 # Homebrew
 if hash brew 2>/dev/null; then
-  echo 'brew already installed'
+  echo 'brew is already installed'
 else
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 brew tap caskroom/fonts
-brew install bash bash-completion@2 duti haskell-stack ispell python3 reattach-to-user-namespace tmux
-brew cask install flux font-fira-code google-backup-and-sync google-chrome iina iterm2 spotify transmission
-brew cleanup
-brew cask cleanup
-
-# Transmission-rss.
-gem install transmission-rss
+brew install aspell bash bash-completion@2 duti haskell-stack python3 reattach-to-user-namespace tmux
+brew cask install flux font-fira-code google-backup-and-sync google-chrome iterm2 spotify sublime-text transmission vlc
 
 # Spacemacs
 brew tap d12frosted/emacs-plus
 brew install emacs-plus --with-24bit-color --with-natural-title-bar
 git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d ||:
 ## haskell layer deps
-stack install --install-ghc --resolver=nightly apply-refact hlint stylish-haskell hasktags hoogle intero
+stack install apply-refact hlint stylish-haskell hasktags hoogle intero
 ## python layer deps
-sudo pip3 install autoflake flake8 hy
+pip3 install autoflake flake8
+sudo pip3 install hy
 
 # Set dotfiles
 filemap=(
@@ -42,8 +38,6 @@ filemap=(
     ".bashrc"
     ".spacemacs"
     ".tmux.conf"
-    "supervisord.conf"
-    ".config/transmission-rss/config.yml"
 )
 for name in "${filemap[@]}"; do
     url="https://raw.githubusercontent.com/barischj/dotfiles/master/$name"
@@ -56,18 +50,28 @@ done
 
 # Set default apps
 defaults=(
-    "avi com.colliderli.iina"
-    "m4a com.colliderli.iina"
-    "mkv com.colliderli.iina"
-    "mp4 com.colliderli.iina"
+    "avi org.videolan.vlc"
+    "m4a org.videolan.vlc"
+    "mkv org.videolan.vlc"
+    "mp4 org.videolan.vlc"
 )
 for line in "${defaults[@]}"; do
     read format app <<< "$line"
+    echo "Setting $app as default app for $format format"
     duti -s "$app" "$format" all
 done
 
+# Cleanup
+brew cleanup
+brew cask cleanup
+
+# Change to shell to bash 4
+sudo sh -c 'echo /usr/local/bin/bash >> /etc/shells'
+chsh -s /usr/local/bin/bash "$USER"
+
 # Open apps
 open -a backup\ and\ sync
+open -a emacs
 open -a flux
 
 # Final instructions
