@@ -10,6 +10,6 @@ if [ -f $(brew --prefix)/share/bash-completion/bash_completion ]; then
   . $(brew --prefix)/share/bash-completion/bash_completion
 fi
 
-export PS1="\e[35;1m\u\e[m in \e[33;1m\w\e[m \nλ "
+export PS1="\e[35;1m\u\e[m in \e[33;1m\w\e[m \n>>= "
 
 [[ -z ${TMUX+x} ]] && ( tmux a || tmux )
