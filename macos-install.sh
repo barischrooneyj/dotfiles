@@ -41,9 +41,6 @@ brew install emacs-plus --with-24bit-color --with-natural-title-bar
 git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d ||:
 ## Install Haskell layer deps.
 stack install apply-refact hlint stylish-haskell hasktags hoogle intero
-## Install Python layer deps
-pip3 install autoflake flake8
-sudo pip3 install hy
 
 # Set dotfiles.
 dotfiles=(
