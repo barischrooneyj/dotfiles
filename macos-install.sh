@@ -12,7 +12,7 @@ killall Dock
 defaults write -g KeyRepeat -int 1
 defaults write -g ApplePressAndHoldEnabled -bool false
 
-# Set some things with AppleScript.
+# Set system settings with AppleScript.
 applescripts=(
     'highlight-colour.scpt'
 )
@@ -37,12 +37,13 @@ brew cask install flux font-fira-code google-backup-and-sync google-chrome iterm
 
 # Install Spacemacs.
 brew tap d12frosted/emacs-plus
-brew install emacs-plus --with-24bit-color --with-natural-title-bar
+brew install emacs-plus
 git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d ||:
-## Install Haskell layer deps.
-stack install apply-refact hlint stylish-haskell hasktags hoogle intero
+(cd ~/.emacs.d && git checkout develop)
+# Haskell layer dependencies.
+stack install apply-refact hlint stylish-haskell hasktags hoogle
 
-# Set dotfiles.
+# Move dotfiles into place.
 dotfiles=(
     '.bash_profile'
     '.bashrc'
@@ -71,9 +72,8 @@ for line in "${defaults[@]}"; do
     duti -s "$app" "$format" all
 done
 
-# Homebrew cleanup.
+# Cleanup.
 brew cleanup
-brew cask cleanup
 
 # Change to shell to bash 4.
 sudo sh -c 'echo /usr/local/bin/bash >> /etc/shells'
@@ -85,11 +85,16 @@ open -a emacs
 open -a flux
 
 # Final instructions.
+
 cat << EOM
 
-* Remaining issues: https://github.com/barischrooneyj/dotfiles/issues
-
-* Reboot once updates are installed.
+|-----------------------------------------------------------------------|
+|                                                                       |
+| * Remaining issues: https://github.com/barischrooneyj/dotfiles/issues |
+|                                                                       |
+| * Reboot once updates are installed for changes to take effect.       |
+|                                                                       |
+|-----------------------------------------------------------------------|
 
 EOM
 
