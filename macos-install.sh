@@ -75,6 +75,12 @@ done
 # Cleanup.
 brew cleanup
 
+# Change to shell to bash 4.
+# https://github.com/Homebrew/homebrew-core/issues/35460
+# https://github.com/Homebrew/homebrew-core/issues/25370
+sudo sh -c 'echo /usr/local/bin/bash >> /etc/shells'	
+chsh -s /usr/local/bin/bash "$USER"
+
 # Open apps that require further action.
 open -a 'backup and sync'
 open -a emacs
