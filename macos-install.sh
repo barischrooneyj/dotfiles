@@ -3,9 +3,9 @@
 set -euo pipefail
 
 # Configure dock.
-defaults write com.apple.dock autohide -bool true
+# defaults write com.apple.dock autohide -bool true
 defaults write com.apple.dock orientation -string left
-defaults delete com.apple.dock persistent-apps ||:
+defaults write com.apple.dock persistent-apps -array
 killall Dock
 
 # Speed up cursor.
@@ -38,10 +38,10 @@ brew cask install flux font-fira-code google-backup-and-sync google-chrome iterm
 # Install Spacemacs.
 brew tap d12frosted/emacs-plus
 brew install emacs-plus
-git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d ||:
+rm -rf ~/.emacs.d && git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
 (cd ~/.emacs.d && git checkout develop)
 # Haskell layer dependencies.
-stack install apply-refact hlint stylish-haskell hasktags hoogle
+stack install --resolver lts-12.25 apply-refact hlint stylish-haskell hasktags hoogle
 
 # Move dotfiles into place.
 dotfiles=(
@@ -67,17 +67,13 @@ defaults=(
     "mp4 org.videolan.vlc"
 )
 for line in "${defaults[@]}"; do
-    read format app <<< "$line"
-    echo "Setting $app as default app for $format format"
-    duti -s "$app" "$format" all
+    read extension app <<< "$line"
+    echo "Setting $app as default for $extension extension"
+    duti -s "$app" "$extension" all
 done
 
 # Cleanup.
 brew cleanup
-
-# Change to shell to bash 4.
-sudo sh -c 'echo /usr/local/bin/bash >> /etc/shells'
-chsh -s /usr/local/bin/bash "$USER"
 
 # Open apps that require further action.
 open -a 'backup and sync'
