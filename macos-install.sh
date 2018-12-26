@@ -33,7 +33,7 @@ else
 fi
 brew tap caskroom/fonts
 brew install aspell bash bash-completion@2 duti haskell-stack python3 reattach-to-user-namespace tmux
-brew cask install flux font-fira-code google-backup-and-sync google-chrome iterm2 spotify sublime-text transmission vlc
+brew cask install flux font-fira-code google-backup-and-sync google-chrome iterm2 signal spotify sublime-text transmission vlc
 
 # Install Spacemacs.
 brew tap d12frosted/emacs-plus
@@ -101,4 +101,4 @@ cat << EOM
 EOM
 
 # Install "all appropriate" updates.
-softwareupdate --install --all
+softwareupdate --install --all --restart
