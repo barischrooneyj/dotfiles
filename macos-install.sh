@@ -32,9 +32,9 @@ else
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 fi
 brew tap d12frosted/emacs-plus
-brew tap homebrew/cask-fonts && brew cask install font-iosevka font-iosevka-slab
+brew tap homebrew/cask-fonts
 brew install duti emacs@28 python3 reattach-to-user-namespace tmux
-brew cask install firefox-developer-edition flux google-backup-and-sync google-chrome iterm2 signal spotify sublime-text transmission vlc
+brew cask install firefox-developer-edition flux font-iosevka font-iosevka-slab igoogle-backup-and-sync google-chrome iterm2 signal spotify sublime-text transmission vlc
 
 # Haskell
 curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
@@ -47,6 +47,7 @@ brew install fd findutils ripgrep
 # Move dotfiles into place.
 dotfiles=(
     '.tmux.conf'
+    '.zshrc'
 )
 for filename in "${dotfiles[@]}"; do
     url="https://raw.githubusercontent.com/barischj/dotfiles/master/$filename"
@@ -56,6 +57,11 @@ for filename in "${dotfiles[@]}"; do
     mkdir -p "$(dirname $dest_path)"
     echo "$src_file" > "$dest_path"
 done
+source ~/.zshrc
+
+# Zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+git clone https://github.com/reobin/typewritten.git $ZSH_CUSTOM/themes/typewritten
 
 # Set default apps.
 defaults=(
