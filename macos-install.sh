@@ -29,25 +29,23 @@ rm temp.scpt
 if hash brew 2>/dev/null; then
   echo 'brew is already installed'
 else
-  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 fi
-brew tap caskroom/fonts
-brew install aspell bash bash-completion@2 duti haskell-stack python3 reattach-to-user-namespace tmux
-brew cask install flux font-fira-code google-backup-and-sync google-chrome iterm2 signal spotify sublime-text transmission vlc
-
-# Install Spacemacs.
 brew tap d12frosted/emacs-plus
-brew install emacs-plus
-rm -rf ~/.emacs.d && git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
-(cd ~/.emacs.d && git checkout develop)
-# Haskell layer dependencies.
-stack install --resolver lts-12.25 apply-refact hlint stylish-haskell hasktags hoogle
+brew tap homebrew/cask-fonts && brew cask install font-iosevka font-iosevka-slab
+brew install duti emacs@28 python3 reattach-to-user-namespace tmux
+brew cask install firefox-developer-edition flux google-backup-and-sync google-chrome iterm2 signal spotify sublime-text transmission vlc
+
+# Haskell
+curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
+
+# Doom Emacs.
+git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
+~/.emacs.d/bin/doom install
+brew install fd findutils ripgrep
 
 # Move dotfiles into place.
 dotfiles=(
-    '.bash_profile'
-    '.bashrc'
-    '.spacemacs'
     '.tmux.conf'
 )
 for filename in "${dotfiles[@]}"; do
@@ -75,15 +73,8 @@ done
 # Cleanup.
 brew cleanup
 
-# Change to shell to bash 4.
-# https://github.com/Homebrew/homebrew-core/issues/35460
-# https://github.com/Homebrew/homebrew-core/issues/25370
-sudo sh -c 'echo /usr/local/bin/bash >> /etc/shells'	
-chsh -s /usr/local/bin/bash "$USER"
-
 # Open apps that require further action.
 open -a 'backup and sync'
-open -a emacs
 open -a flux
 
 # Final instructions.
