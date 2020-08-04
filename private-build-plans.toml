@@ -1,0 +1,5 @@
+[buildPlans.iosevka-term-slab-haskell]
+family = "Iosevka Term Slab Haskell"
+design = ["sp-term", "slab", "ligset-haskell"]
+snapshotFamily = 'iosevka-slab'
+snapshotFeature = '"NWID" on'

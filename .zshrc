@@ -1,15 +1,20 @@
-export ZSH="/Users/jeremy/.oh-my-zsh"
-ENABLE_CORRECTION="true"
-HIST_STAMPS="dd/mm/yyyy"
-plugins=(git osx)
-ZSH_THEME="typewritten/typewritten"
-export TYPEWRITTEN_CURSOR="block"
-export TYPEWRITTEN_PROMPT_LAYOUT="single_line"
+export ZSH='/Users/jeremy/.oh-my-zsh'
+HIST_STAMPS='dd/mm/yyyy'
+plugins=(cabal git osx tmux)
+ZSH_THEME='typewritten/typewritten'
+export TYPEWRITTEN_CURSOR='block'
+export TYPEWRITTEN_SYMBOL='>>='
+export TYPEWRITTEN_COLORS='symbol:green'
+export ZSH_TMUX_AUTOSTART='true'
+export ZSH_TMUX_AUTOSTART_ONCE='false'
 source $ZSH/oh-my-zsh.sh
 
 alias c='clear'
+alias l='ls -A'
+alias ll='ls -lhA'
 alias gs='git status'
-alias tk='tmux kill-server'
+export PATH=~/.emacs.d/bin:$PATH
 
-# Attach if not in tmux (start server if necessary).
-[[ -z ${TMUX+x} ]] && ( tmux new-session -A -s main )
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi

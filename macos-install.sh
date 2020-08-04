@@ -3,16 +3,16 @@
 set -euo pipefail
 
 # Configure dock.
-# defaults write com.apple.dock autohide -bool true
 defaults write com.apple.dock orientation -string left
 defaults write com.apple.dock persistent-apps -array
+# defaults write com.apple.dock autohide -bool true
 killall Dock
 
 # Speed up cursor.
 defaults write -g KeyRepeat -int 1
 defaults write -g ApplePressAndHoldEnabled -bool false
 
-# Set system settings with AppleScript.
+# AppleScript scripts.
 applescripts=(
     'highlight-colour.scpt'
 )
@@ -33,8 +33,9 @@ else
 fi
 brew tap d12frosted/emacs-plus
 brew tap homebrew/cask-fonts
-brew install duti emacs@28 python3 reattach-to-user-namespace tmux
-brew cask install firefox-developer-edition flux font-iosevka font-iosevka-slab igoogle-backup-and-sync google-chrome iterm2 signal spotify sublime-text transmission vlc
+brew install duti emacs@28 pyenv reattach-to-user-namespace tmux
+brew cask install firefox-developer-edition flux font-iosevka font-iosevka-slab google-backup-and-sync google-chrome iterm2 signal spotify sublime-text transmission vlc
+brew install openssl readline sqlite3 xz zlib # pyenv: https://github.com/pyenv/pyenv/wiki#suggested-build-environment
 
 # Haskell
 curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
@@ -57,11 +58,17 @@ for filename in "${dotfiles[@]}"; do
     mkdir -p "$(dirname $dest_path)"
     echo "$src_file" > "$dest_path"
 done
-source ~/.zshrc
 
-# Zsh
+# Oh My Zsh.
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 git clone https://github.com/reobin/typewritten.git $ZSH_CUSTOM/themes/typewritten
+source ~/.zshrc
+
+# Tmux Plugin Manager.
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
+# iTerm Dracula theme.
+git clone https://github.com/dracula/iterm.git
 
 # Set default apps.
 defaults=(
@@ -76,15 +83,20 @@ for line in "${defaults[@]}"; do
     duti -s "$app" "$extension" all
 done
 
+# Iosevka font.
+# ~/Library/Fonts
+
 # Cleanup.
 brew cleanup
 
 # Open apps that require further action.
+open -a 'firefox developer edition'
+read -n 1 -s -r -p "Press any key to continue"
 open -a 'backup and sync'
+read -n 1 -s -r -p "Press any key to continue"
 open -a flux
 
 # Final instructions.
-
 cat << EOM
 
 |-----------------------------------------------------------------------|
