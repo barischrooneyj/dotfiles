@@ -68,9 +68,6 @@ source ~/.zshrc
 # Tmux Plugin Manager.
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
-# iTerm Dracula theme.
-git clone https://github.com/dracula/iterm.git
-
 # Set default apps.
 defaults=(
     "avi org.videolan.vlc"
