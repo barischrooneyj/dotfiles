@@ -4,7 +4,7 @@ plugins=(cabal git osx tmux)
 ZSH_THEME='typewritten/typewritten'
 export TYPEWRITTEN_CURSOR='block'
 export TYPEWRITTEN_SYMBOL='>>='
-export TYPEWRITTEN_COLORS='symbol:green'
+export TYPEWRITTEN_COLOR_MAPPINGS='secondary:green'
 export ZSH_TMUX_AUTOSTART='true'
 export ZSH_TMUX_AUTOSTART_ONCE='false'
 source $ZSH/oh-my-zsh.sh

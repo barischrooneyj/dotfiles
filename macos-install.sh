@@ -62,6 +62,7 @@ done
 # Oh My Zsh.
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 git clone https://github.com/reobin/typewritten.git $ZSH_CUSTOM/themes/typewritten
+(cd $ZSH_CUSTOM/themes/typewritten && git pull && cd -)
 source ~/.zshrc
 
 # Tmux Plugin Manager.
