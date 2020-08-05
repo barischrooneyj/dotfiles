@@ -90,7 +90,11 @@ read -n 1 -s -r -p 'Press any key to continue: login to Backup and Sync'
 open -a 'backup and sync'
 read -n 1 -s -r -p 'Press any key to continue: setup f.lux'
 open -a flux
+read -n 1 -s -r -p 'Press any key to continue: set iTerm profile (~/Desktop/iTermProfile.json)'
+curl https://github.com/barischrooneyj/dotfiles/blob/master/iTermProfile.json -o ~/Desktop/iTermProfile.json
+open -a iterm
 read -n 1 -s -r -p 'Press any key to continue: visit remaining issues'
+rm ~/Desktop/iTermProfile.json
 open https://github.com/barischrooneyj/dotfiles/issues
 read -n 1 -s -r -p 'Press any key to continue: install updates and restart'
 
