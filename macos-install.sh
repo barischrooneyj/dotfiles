@@ -29,7 +29,7 @@ else
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 fi
 brew tap d12frosted/emacs-plus
-brew install docker duti emacs@28 pyenv reattach-to-user-namespace tmux wget
+brew install docker duti emacs-plus@28 pyenv reattach-to-user-namespace tmux wget
 brew cask install docker firefox-developer-edition flux google-backup-and-sync google-chrome iterm2 signal spotify sublime-text transmission vlc
 brew install openssl readline sqlite3 xz zlib # pyenv: https://github.com/pyenv/pyenv/wiki#suggested-build-environment
 
