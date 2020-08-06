@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 set -euo pipefail
 
@@ -37,7 +37,7 @@ brew install openssl readline sqlite3 xz zlib # pyenv: https://github.com/pyenv/
 curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
 
 # Doom Emacs.
-git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
+git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d || true
 ~/.emacs.d/bin/doom install
 brew install fd findutils ripgrep  # https://github.com/hlissner/doom-emacs#prerequisites
 
@@ -56,12 +56,12 @@ for filename in "${dotfiles[@]}"; do
 done
 
 # Oh My Zsh.
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-git clone https://github.com/reobin/typewritten.git $ZSH_CUSTOM/themes/typewritten
-source ~/.zshrc
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" || true
+if [[ -z "${ZSH_CUSTOM-}" ]]; then ZSH_CUSTOM="$ZSH/custom"; fi
+git clone https://github.com/reobin/typewritten.git $ZSH_CUSTOM/themes/typewritten || true
 
 # Tmux Plugin Manager.
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm || true
 
 # Set default apps.
 defaults=(
@@ -77,8 +77,11 @@ for line in "${defaults[@]}"; do
 done
 
 # Iosevka font.
-wget -r https://github.com/barischrooneyj/dotfiles/tree/master/fonts/iosevka-term-slab-haskell
-for f in dotfiles/fonts/**/*.ttf; do cp $f ~/Library/Fonts; done
+OUT_FONTS_DIR=temp-dotfiles
+rm -rf $OUT_FONTS_DIR
+git clone https://github.com/barischrooneyj/dotfiles $OUT_FONTS_DIR
+for f in $OUT_FONTS_DIR/**/*.ttf; do cp $f ~/Library/Fonts; done
+rm -rf $OUT_FONTS_DIR
 
 # Cleanup.
 brew cleanup
