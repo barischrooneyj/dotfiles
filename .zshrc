@@ -12,8 +12,10 @@ source $ZSH/oh-my-zsh.sh
 alias c='clear'
 alias l='ls -A'
 alias ll='ls -lhA'
+alias gl='git log'
 alias gs='git status'
 export PATH=~/.emacs.d/bin:$PATH
+export PATH=/Users/jeremy/.local/bin:$PATH
 
 if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
