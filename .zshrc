@@ -5,9 +5,6 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# vi editing mode.
-bindkey -v
-
 source ~/antigen.zsh
 # Bundles from the default repo.
 antigen use oh-my-zsh
@@ -23,6 +20,10 @@ antigen bundle zsh-users/zsh-history-substring-search # Must be after zsh-syntax
 # Theming and apply.
 antigen theme romkatv/powerlevel10k
 antigen apply
+
+# vi editing mode.
+bindkey -v
+bindkey "^R" history-incremental-search-backward
 
 # Environment variables.
 export PATH=~/.emacs.d/bin:$PATH
