@@ -1,22 +1,42 @@
-export ZSH='/Users/jeremy/.oh-my-zsh'
-HIST_STAMPS='dd/mm/yyyy'
-plugins=(cabal git osx tmux)
-ZSH_THEME='typewritten/typewritten'
-export TYPEWRITTEN_CURSOR='block'
-export TYPEWRITTEN_SYMBOL='>>='
-export TYPEWRITTEN_COLOR_MAPPINGS='secondary:green'
-export ZSH_TMUX_AUTOSTART='true'
-export ZSH_TMUX_AUTOSTART_ONCE='false'
-source $ZSH/oh-my-zsh.sh
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
 
+# vi editing mode.
+bindkey -v
+
+source ~/antigen.zsh
+# Bundles from the default repo.
+antigen use oh-my-zsh
+antigen bundle docker
+antigen bundle git
+antigen bundle pyenv
+antigen bundle tmux
+# Bundles from the zsh-users repo.
+antigen bundle zsh-users/zsh-autosuggestions
+antigen bundle zsh-users/zsh-completions
+antigen bundle zsh-users/zsh-syntax-highlighting # Must be the last plugin sourced!
+antigen bundle zsh-users/zsh-history-substring-search # Must be after zsh-syntax-highlighting!
+# Theming and apply.
+antigen theme romkatv/powerlevel10k
+antigen apply
+
+# Environment variables.
+export PATH=~/.emacs.d/bin:$PATH
+export PATH=~/.local/bin:$PATH
+
+# Aliases.
 alias c='clear'
 alias l='ls -A'
 alias ll='ls -lhA'
 alias gl='git log'
 alias gs='git status'
-export PATH=~/.emacs.d/bin:$PATH
-export PATH=/Users/jeremy/.local/bin:$PATH
+alias vi='nvim'
+alias vim='nvim'
 
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
-fi
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+[ -f "/Users/jeremy/.ghcup/env" ] && source "/Users/jeremy/.ghcup/env" # ghcup-env
