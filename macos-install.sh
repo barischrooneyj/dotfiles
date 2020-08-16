@@ -5,7 +5,7 @@ set -euo pipefail
 # Configure dock.
 defaults write com.apple.dock orientation -string left
 defaults write com.apple.dock persistent-apps -array
-# defaults write com.apple.dock autohide -bool true
+defaults write com.apple.dock autohide -bool true
 killall Dock
 
 # Speed up cursor.
@@ -29,9 +29,10 @@ else
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 fi
 brew tap d12frosted/emacs-plus
-brew install docker duti emacs-plus@27 neovim pyenv reattach-to-user-namespace tmux wget
+brew install emacs-plus --with-no-titlebar
+brew install pyenv openssl readline sqlite3 xz zlib # pyenv: https://github.com/pyenv/pyenv/wiki#suggested-build-environment
+brew install docker duti neovim reattach-to-user-namespace tmux
 brew cask install discord docker firefox-developer-edition flux google-backup-and-sync google-chrome iterm2 signal spotify sublime-text transmission vlc
-brew install openssl readline sqlite3 xz zlib # pyenv: https://github.com/pyenv/pyenv/wiki#suggested-build-environment
 
 # Haskell
 curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
@@ -54,11 +55,6 @@ for filename in "${dotfiles[@]}"; do
     mkdir -p "$(dirname $dest_path)"
     echo "$src_file" > "$dest_path"
 done
-
-# Oh My Zsh.
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" || true
-if [[ -z "${ZSH_CUSTOM-}" ]]; then ZSH_CUSTOM="$ZSH/custom"; fi
-git clone https://github.com/reobin/typewritten.git $ZSH_CUSTOM/themes/typewritten || true
 
 # Tmux Plugin Manager.
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm || true
