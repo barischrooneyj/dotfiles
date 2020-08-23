@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
-
-{
+let
+  unstable = import <nixos-unstable> { config = config.nixpkgs.config; };
+in {
   # Garbage collect old generations.
   nix.gc.automatic = true;
   nix.gc.dates = "--delete-older-than 7d";
@@ -25,7 +26,8 @@
   # Packages.
   environment.systemPackages = with pkgs; [
     cava compton curl emacs feh firefox-devedition-bin haskellPackages.xmobar
-    git kitty lsd neofetch neovim rofi starship tuir tmux wget xclip
+    git kitty lsd neofetch neovim rofi spotifyd starship tuir tmux wget xclip
+    unstable.spotify-tui
   ];
   programs.fish.enable = true;
   fonts.fonts = with pkgs; [ fira-code ];
