@@ -1,6 +1,11 @@
 { config, pkgs, ... }:
 
 {
+  # Garbage collect old generations.
+  nix.gc.automatic = true;
+  nix.gc.dates = "--delete-older-than 7d";
+  # Allow proprietary or unfree software
+  nixpkgs.config.allowUnfree = true;
   # Include the results of the hardware scan.
   imports = [ ./hardware-configuration.nix ];
   # Use the systemd-boot EFI boot loader.
@@ -9,7 +14,7 @@
   # Per-interface useDHCP will be mandatory in the future.
   networking.useDHCP = false;
   networking.interfaces.ens33.useDHCP = true;
-  # Sound and PulseAudio.
+  # Sound please.
   sound.enable = true;
   hardware.pulseaudio.enable = true;
   # Localisation.
@@ -19,8 +24,8 @@
   time.timeZone = "Europe/Dublin";
   # Packages.
   environment.systemPackages = with pkgs; [
-    cava compton curl emacs feh firefox haskellPackages.xmobar git kitty lsd
-    neofetch neovim starship tuir tmux wget xclip
+    cava compton curl emacs feh firefox-devedition-bin haskellPackages.xmobar
+    git kitty lsd neofetch neovim rofi starship tuir tmux wget xclip
   ];
   programs.fish.enable = true;
   fonts.fonts = with pkgs; [ fira-code ];
@@ -29,7 +34,7 @@
   # Xmonad window manager.
   services.xserver.windowManager.xmonad.enable = true;
   services.xserver.windowManager.xmonad.enableContribAndExtras = true;
-  # Auto-login.
+  # Skip the login screen.
   services.xserver.displayManager.defaultSession = "none+xmonad";
   services.xserver.displayManager.lightdm.enable = true;
   services.xserver.displayManager.lightdm.autoLogin.enable = true;
