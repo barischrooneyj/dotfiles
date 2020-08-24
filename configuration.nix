@@ -16,9 +16,10 @@ in {
   networking.useDHCP = false;
   networking.interfaces.ens33.useDHCP = true;
   # Localisation.
-  i18n.defaultLocale = "en_US.UTF-8";
-  console.font = "Fira Code Retina";
-  console.keyMap = "uk";
+  i18n.defaultLocale = "en_IE.UTF-8";
+  services.xserver.layout = "gb";
+  services.xserver.xkbVariant = "mac";
+  console.useXkbConfig = true;
   time.timeZone = "Europe/Dublin";
   # Packages.
   environment.systemPackages = with pkgs; [
