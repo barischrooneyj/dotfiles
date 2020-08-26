@@ -1,9 +1,15 @@
 * NixOS and macOS configuration.
-System configuration is in =configuration.nix=, home configuration is in =home.nix=.
+System configuration is in =configuration.nix= and home configuration is in =home.nix=.
 ** NixOS
-After installing NixOS (below) and logging in as =jeremy= clone this repository and run =sudo ./get-config.sh=, this will symlink the files in this repository to their expected locations on the system.
+After installing NixOS (below) and logging in, clone this repository and run =sudo ./get-config.sh=. This will symlink the files in this repository to their expected locations on the system.
 
 To apply the system configuration run =sudo nixos-rebuild && reboot=. To apply the home configuration run =home-manager switch=.
+
+Final steps:
+- login to Firefox
+- login to Bitwarden
+- login to insync
+- install Doom Emacs
 *** Installing NixOS on an external SSD
 Run the scripts TODO, use GParted to check the device name (e.g. =sdc=) and replace =sda= in the scripts.
 
@@ -13,4 +19,4 @@ Install and reboot with =sudo nixos-install && reboot=. Login as =root= and set 
 ** macOS
 - TODO: redo =with nix-darwin=
 
-=bash <(curl -s https://raw.githubusercontent.com/barischj/dotfiles/master/macos-install.sh)=
+# =bash <(curl -s https://raw.githubusercontent.com/barischj/dotfiles/master/macos-install.sh)=

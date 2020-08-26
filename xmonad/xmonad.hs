@@ -38,11 +38,11 @@ logHook' xmproc = Log.dynamicLogWithPP Log.xmobarPP
   }
 
 startupHook' = do
-  spawnOnce "sleep 1 && feh --bg-scale ~/.config/bg.jpg &"
+  spawnOnce "sleep 1 && feh --bg-scale /home/jeremy/.config/bg.jpg &"
   spawnOnce "compton &"
 
 main = do
-  xmproc <- spawnPipe "pkill xmobar; xmobar  ~/.config/xmobar/xmobar.hs"
+  xmproc <- spawnPipe "pkill xmobar; xmobar  /home/jeremy/.config/xmobar/xmobar.hs"
   X.xmonad $ Docks.docks desktopConfig
     { X.borderWidth        = 3
     , X.focusedBorderColor = purple
