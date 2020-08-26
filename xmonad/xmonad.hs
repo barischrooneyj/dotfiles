@@ -24,7 +24,7 @@ red      = "#ff5555"
 
 layoutHook' =
   Docks.avoidStruts
-  $ Space.spacingRaw True border True border True
+  -- $ Space.spacingRaw True border True border True
   $ X.layoutHook X.def
   where border = Space.Border sp sp sp sp
         sp     = 10
@@ -42,7 +42,7 @@ startupHook' = do
   spawnOnce "compton &"
 
 main = do
-  xmproc <- spawnPipe "pkill xmobar; xmobar  ~/.config/xmobar/config.hs"
+  xmproc <- spawnPipe "pkill xmobar; xmobar  ~/.config/xmobar/xmobar.hs"
   X.xmonad $ Docks.docks desktopConfig
     { X.borderWidth        = 3
     , X.focusedBorderColor = purple
