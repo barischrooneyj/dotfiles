@@ -1,0 +1,16 @@
+* NixOS and macOS configuration.
+System configuration is in =configuration.nix=, home configuration is in =home.nix=.
+** NixOS
+After installing NixOS (below) and logging in as =jeremy= clone this repository and run =sudo ./get-config.sh=, this will symlink the files in this repository to their expected locations on the system.
+
+To apply the system configuration run =sudo nixos-rebuild && reboot=. To apply the home configuration run =home-manager switch=.
+*** Installing NixOS on an external SSD
+Run the scripts TODO, use GParted to check the device name (e.g. =sdc=) and replace =sda= in the scripts.
+
+Set =nixpkgs.config.allowUnfree = true;= and uncomment a few options to create a minimal =configuration.nix=.
+
+Install and reboot with =sudo nixos-install && reboot=. Login as =root= and set a password for =jeremy=.
+** macOS
+- TODO: redo =with nix-darwin=
+
+=bash <(curl -s https://raw.githubusercontent.com/barischj/dotfiles/master/macos-install.sh)=
