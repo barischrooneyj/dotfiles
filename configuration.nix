@@ -39,9 +39,12 @@ in {
   ];
   programs.fish.enable = true;
   fonts.fonts = with pkgs; [ fira-code montserrat ];
-  # Enable sound.
+  # Sound and bluetooth.
   sound.enable = true;
   hardware.pulseaudio.enable = true;
+  hardware.pulseaudio.package = pkgs.pulseaudioFull;
+  hardware.bluetooth.enable = true;
+  services.blueman.enable = true;
   # X11 windowing system.
   services.xserver.enable = true;
   # Xmonad window manager.
