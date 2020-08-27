@@ -1,9 +1,9 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
 (setq display-line-numbers-type 'relative
-      doom-font (font-spec :family "FiraCode Nerd Font" :size 16 :weight 'semi-bold)
+      doom-font (font-spec :family "Fira Code" :size 26)
       doom-theme 'doom-dracula
-      doom-variable-pitch-font (font-spec :family "FiraCode Nerd Font" :size 16 :weight 'semi-bold)
+      doom-variable-pitch-font (font-spec :family "Fira Code" :size 26)
       mac-right-option-modifier nil
       ns-use-native-fullscreen t
       org-directory "~/Google Drive/"
