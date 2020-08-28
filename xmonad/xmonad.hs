@@ -7,6 +7,8 @@ import qualified XMonad.Layout.Spacing    as Space
 import           XMonad.Util.Run           ( spawnPipe )
 import           XMonad.Util.SpawnOnce     ( spawnOnce )
 
+import XMonad.Layout.IndependentScreens
+
 background = "#282a36"
 darkGrey   = "#44475a"
 grey       = "#6272a4"
@@ -21,33 +23,37 @@ pink     = "#ff79c6"
 purple   = "#bd93f9"
 red      = "#ff5555"
 
+spawnBar screenId = spawnPipe $
+  "xmobar -x " ++ show screenId ++ " /home/jeremy/.config/xmobar/xmobar.hs"
+
+killAllBars = spawnOnce "pkill xmobar"
 
 layoutHook' =
   Docks.avoidStruts
   -- $ Space.spacingRaw True border True border True
   $ X.layoutHook X.def
   where border = Space.Border sp sp sp sp
-        sp     = 10
+        sp     = 7
 
-logHook' xmproc = Log.dynamicLogWithPP Log.xmobarPP
+logHook' xmprocs = mapM_ (\xmproc -> Log.dynamicLogWithPP Log.xmobarPP
   { Log.ppOutput          = hPutStrLn xmproc
   , Log.ppCurrent         = Log.xmobarColor green ""
   , Log.ppHidden          = Log.xmobarColor grey  ""
   , Log.ppTitle           = Log.xmobarColor white "" . Log.shorten 30
   , Log.ppSep             = " : "
-  }
+  }) xmprocs
 
-startupHook' = do
-  spawnOnce "sleep 1 && feh --bg-scale /home/jeremy/.config/bg.jpg &"
-  spawnOnce "compton &"
+startupHook' = spawnOnce
+    "sleep 1 && feh --bg-scale /home/jeremy/.config/bg.jpg"
 
 main = do
-  xmproc <- spawnPipe "pkill xmobar; xmobar  /home/jeremy/.config/xmobar/xmobar.hs"
+  n <- countScreens
+  xmprocs <- mapM spawnBar [0 .. n - 1]
   X.xmonad $ Docks.docks desktopConfig
     { X.borderWidth        = 3
     , X.focusedBorderColor = purple
     , X.layoutHook         = layoutHook'
-    , X.logHook            = logHook' xmproc
+    , X.logHook            = logHook' xmprocs
     , X.modMask            = X.mod4Mask
     , X.normalBorderColor  = grey
     , X.startupHook        = startupHook'
