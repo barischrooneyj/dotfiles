@@ -55,7 +55,7 @@ main = do
     , X.layoutHook         = layoutHook'
     , X.logHook            = logHook' xmprocs
     , X.modMask            = X.mod4Mask
-    , X.normalBorderColor  = grey
+    , X.normalBorderColor  = background
     , X.startupHook        = startupHook'
     , X.terminal           = "kitty"
     }

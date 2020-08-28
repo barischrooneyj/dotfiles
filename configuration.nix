@@ -42,6 +42,8 @@ in {
   services.blueman.enable = true;
   # Webcam.
   hardware.facetimehd.enable = true;
+  # SSD optimisation.
+  services.fstrim.enable = true;
   ###################
   # ACCOUNT & LOGIN #
   ###################
