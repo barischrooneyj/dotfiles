@@ -30,11 +30,10 @@ in {
   time.timeZone = "Europe/Dublin";
   # Packages.
   environment.systemPackages = with pkgs; [
-    cava compton curl emacs feh haskellPackages.xmobar git kitty lsd neofetch
-    neovim rofi spotifyd starship sublime3 tuir tmux wget wirelesstools xclip
-
-    cabal-install cabal2nix home-manager vlc
-
+    bitwarden-cli cabal-install cabal2nix cava curl emacs feh
+    haskellPackages.xmobar home-manager git kitty lsd neofetch neovim rofi
+    spotifyd starship sublime3 tuir tmux vlc wget wirelesstools xclip
+    # Unstable packages.
     unstable.firefox-devedition-bin-unwrapped unstable.spotify-tui
   ];
   programs.fish.enable = true;
