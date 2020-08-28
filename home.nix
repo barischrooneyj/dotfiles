@@ -8,6 +8,7 @@
   home.file.".config/kitty/kitty.conf".source = "/home/jeremy/dotfiles/kitty/kitty.conf";
   home.file.".config/kitty/dracula.conf".source = "/home/jeremy/dotfiles/kitty/dracula.conf";
   home.file.".config/kitty/diff.conf".source = "/home/jeremy/dotfiles/kitty/diff.conf";
+  home.file.".config/fish/config.fish".source = "/home/jeremy/dotfiles/fish/config.fish";
   home.file.".xmonad/xmonad.hs".source        = "/home/jeremy/dotfiles/xmonad/xmonad.hs";
   home.file.".config/xmobar/xmobar.hs".source = "/home/jeremy/dotfiles/xmobar/xmobar.hs";
   programs.git = {
