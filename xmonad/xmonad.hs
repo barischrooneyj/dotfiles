@@ -39,7 +39,7 @@ logHook' xmprocs = mapM_ (\xmproc -> Log.dynamicLogWithPP Log.xmobarPP
   { Log.ppOutput          = hPutStrLn xmproc
   , Log.ppCurrent         = Log.xmobarColor green ""
   , Log.ppHidden          = Log.xmobarColor grey  ""
-  , Log.ppTitle           = Log.xmobarColor white "" . Log.shorten 30
+  , Log.ppTitle           = const ""
   , Log.ppSep             = "  "
   }) xmprocs
 
