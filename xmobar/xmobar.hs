@@ -6,5 +6,5 @@ Config
     [ Run StdinReader
     , Run Date "%a %b %_d %l:%M" "date" 10
     ]
-  , template = " %StdinReader% }{ <fc=#ffb86c>%date%</fc> "
+  , template = " %StdinReader% }{ %date% "
   }
