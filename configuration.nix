@@ -44,6 +44,9 @@ in {
   hardware.facetimehd.enable = true;
   # SSD optimisation.
   services.fstrim.enable = true;
+  # Display colour temperature.
+  services.redshift.enable = true;
+  location.provider = "geoclue2";
   ###################
   # ACCOUNT & LOGIN #
   ###################
