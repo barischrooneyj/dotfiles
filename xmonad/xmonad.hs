@@ -40,7 +40,7 @@ logHook' xmprocs = mapM_ (\xmproc -> Log.dynamicLogWithPP Log.xmobarPP
   , Log.ppCurrent         = Log.xmobarColor green ""
   , Log.ppHidden          = Log.xmobarColor grey  ""
   , Log.ppTitle           = Log.xmobarColor white "" . Log.shorten 30
-  , Log.ppSep             = " : "
+  , Log.ppSep             = "  "
   }) xmprocs
 
 startupHook' = spawnOnce
