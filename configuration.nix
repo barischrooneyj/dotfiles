@@ -18,6 +18,8 @@ in {
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  # Skip boot messages.
+  boot.plymouth.enable = true;
   # Networking. Per-interface useDHCP will be mandatory in the future.
   networking.useDHCP = false;
   networking.interfaces.wlp3s0.useDHCP = true;
