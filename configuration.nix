@@ -33,8 +33,7 @@ in {
   console.useXkbConfig = true;
   # Trackpad.
   services.xserver.libinput.enable = true;
-  services.xserver.multitouch.enable = true;
-  services.xserver.multitouch.invertScroll = true;
+  services.xserver.libinput.naturalScrolling = true;
   # Sound and bluetooth.
   sound.enable = true;
   hardware.pulseaudio.enable = true;
