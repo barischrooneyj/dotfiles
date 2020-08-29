@@ -44,11 +44,13 @@ in {
   services.blueman.enable = true;
   # Webcam.
   hardware.facetimehd.enable = true;
-  # SSD optimisation.
-  services.fstrim.enable = true;
   # Display colour temperature.
   services.redshift.enable = true;
   location.provider = "geoclue2";
+  # mbpfan fan controller.
+  services.mbpfan.enable = true;
+  # SSD optimisation.
+  services.fstrim.enable = true;
   ###################
   # ACCOUNT & LOGIN #
   ###################

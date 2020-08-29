@@ -1,13 +1,12 @@
-import           System.IO                 ( hPutStrLn )
-import qualified XMonad                   as X
-import           XMonad.Config.Desktop     ( desktopConfig )
-import qualified XMonad.Hooks.DynamicLog  as Log
-import qualified XMonad.Hooks.ManageDocks as Docks
-import qualified XMonad.Layout.Spacing    as Space
-import           XMonad.Util.Run           ( spawnPipe )
-import           XMonad.Util.SpawnOnce     ( spawnOnce )
-
-import XMonad.Layout.IndependentScreens
+import           System.IO                         ( hPutStrLn )
+import qualified XMonad                           as X
+import           XMonad.Config.Desktop             ( desktopConfig )
+import qualified XMonad.Hooks.DynamicLog          as Log
+import qualified XMonad.Hooks.ManageDocks         as Docks
+import qualified XMonad.Layout.IndependentScreens as IS
+import qualified XMonad.Layout.Spacing            as Space
+import           XMonad.Util.Run                   ( spawnPipe )
+import           XMonad.Util.SpawnOnce             ( spawnOnce )
 
 background = "#282a36"
 darkGrey   = "#44475a"
