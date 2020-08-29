@@ -7,6 +7,7 @@ import qualified XMonad.Layout.IndependentScreens as IS
 import qualified XMonad.Layout.Spacing            as Space
 import           XMonad.Util.Run                   ( spawnPipe )
 import           XMonad.Util.SpawnOnce             ( spawnOnce )
+import           XMonad.Util.EZConfig              ( additionalKeys )
 
 background = "#282a36"
 darkGrey   = "#44475a"
@@ -21,6 +22,12 @@ orange   = "#ffb86c"
 pink     = "#ff79c6"
 purple   = "#bd93f9"
 red      = "#ff5555"
+
+modMask = X.mod4Mask
+
+browser  = "firefox"
+editor   = "emacs"
+terminal = "kitty"
 
 spawnBar screenId = spawnPipe $
   "xmobar -x " ++ show screenId ++ " /home/jeremy/.config/xmobar/xmobar.hs"
@@ -46,15 +53,21 @@ startupHook' = spawnOnce
     "sleep 1 && feh --bg-scale /home/jeremy/.config/bg.jpg"
 
 main = do
-  n <- countScreens
+  n <- IS.countScreens
   xmprocs <- mapM spawnBar [0 .. n - 1]
   X.xmonad $ Docks.docks desktopConfig
     { X.borderWidth        = 3
     , X.focusedBorderColor = purple
     , X.layoutHook         = layoutHook'
     , X.logHook            = logHook' xmprocs
-    , X.modMask            = X.mod4Mask
+    , X.modMask            = modMask
     , X.normalBorderColor  = grey
     , X.startupHook        = startupHook'
-    , X.terminal           = "kitty"
+    , X.terminal           = terminal
     }
+    `additionalKeys`
+    [ ((modMask, X.xK_b), X.spawn browser )
+    , ((modMask, X.xK_c), X.kill          )
+    , ((modMask, X.xK_e), X.spawn editor  )
+    , ((modMask, X.xK_t), X.spawn terminal)
+    ]
