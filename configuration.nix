@@ -42,11 +42,18 @@ in {
   hardware.pulseaudio.package = pkgs.pulseaudioFull;
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
-  # Webcam.
-  hardware.facetimehd.enable = true;
-  # Display colour temperature.
+  # Display: colour temperature.
   services.redshift.enable = true;
   location.provider = "geoclue2";
+  # Display: backlight.
+  programs.light.enable = true;
+  services.actkbd.enable = true;
+  services.actkbd.bindings = [
+    { keys = [ 225 ]; events = [ "key" ]; command = "/run/current-system/sw/bin/light -A 10"; }
+    { keys = [ 224 ]; events = [ "key" ]; command = "/run/current-system/sw/bin/light -U 10"; }
+  ];
+  # Webcam.
+  hardware.facetimehd.enable = true;
   # mbpfan fan controller.
   services.mbpfan.enable = true;
   # SSD optimisation.
@@ -55,7 +62,7 @@ in {
   # ACCOUNT & LOGIN #
   ###################
   users.users.jeremy.isNormalUser = true;
-  users.users.jeremy.extraGroups = [ "wheel" ];
+  users.users.jeremy.extraGroups = [ "video" "wheel" ];
   users.users.jeremy.shell = pkgs.fish;
   environment.variables.EDITOR = "nvim";
   # Skip the login screen.
