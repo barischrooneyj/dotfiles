@@ -1,5 +1,6 @@
 import           System.IO                         ( hPutStrLn )
 import qualified XMonad                           as X
+import qualified XMonad.Actions.WorkspaceNames    as Names
 import           XMonad.Config.Desktop             ( desktopConfig )
 import qualified XMonad.Hooks.DynamicLog          as Log
 import qualified XMonad.Hooks.ManageDocks         as Docks
@@ -41,13 +42,15 @@ layoutHook' =
   where border = Space.Border sp sp sp sp
         sp     = 7
 
-logHook' xmprocs = mapM_ (\xmproc -> Log.dynamicLogWithPP Log.xmobarPP
-  { Log.ppOutput          = hPutStrLn xmproc
-  , Log.ppCurrent         = Log.xmobarColor green ""
-  , Log.ppHidden          = Log.xmobarColor grey  ""
-  , Log.ppTitle           = const ""
-  , Log.ppSep             = "  "
-  }) xmprocs
+logHook' xmprocs =
+  mapM_ (\x -> Names.workspaceNamesPP (pp x) >>= Log.dynamicLogWithPP) xmprocs
+  where pp xmproc = Log.xmobarPP
+          { Log.ppOutput          = hPutStrLn xmproc
+          , Log.ppCurrent         = Log.xmobarColor green ""
+          , Log.ppHidden          = Log.xmobarColor grey  ""
+          , Log.ppTitle           = const ""
+          , Log.ppSep             = "  "
+          }
 
 startupHook' = spawnOnce
     "sleep 1 && feh --bg-scale /home/jeremy/.config/bg.jpg"
@@ -66,8 +69,9 @@ main = do
     , X.terminal           = terminal
     }
     `additionalKeys`
-    [ ((modMask, X.xK_b), X.spawn browser )
-    , ((modMask, X.xK_c), X.kill          )
-    , ((modMask, X.xK_e), X.spawn editor  )
-    , ((modMask, X.xK_t), X.spawn terminal)
+    [ ((modMask, X.xK_b), X.spawn browser            )
+    , ((modMask, X.xK_c), X.kill                     )
+    , ((modMask, X.xK_e), X.spawn editor             )
+    , ((modMask, X.xK_r), Names.renameWorkspace X.def)
+    , ((modMask, X.xK_t), X.spawn terminal           )
     ]
