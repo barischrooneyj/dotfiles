@@ -57,6 +57,7 @@ in {
   users.users.jeremy.isNormalUser = true;
   users.users.jeremy.extraGroups = [ "wheel" ];
   users.users.jeremy.shell = pkgs.fish;
+  environment.variables.EDITOR = "nvim";
   # Skip the login screen.
   services.xserver.displayManager.lightdm.enable = true;
   services.xserver.displayManager.lightdm.autoLogin.enable = true;
