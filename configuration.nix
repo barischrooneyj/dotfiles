@@ -58,26 +58,24 @@ in {
   services.mbpfan.enable = true;
   # SSD optimisation.
   services.fstrim.enable = true;
-  ###################
-  # ACCOUNT & LOGIN #
-  ###################
+  #########
+  # LOGIN #
+  #########
+  services.xserver.displayManager.lightdm.enable = true;
+  services.xserver.displayManager.defaultSession = "none+xmonad";
+  #########
+  # USERS #
+  #########
   users.users.jeremy.isNormalUser = true;
   users.users.jeremy.extraGroups = [ "video" "wheel" ];
   users.users.jeremy.shell = pkgs.fish;
-  environment.variables.EDITOR = "nvim";
-  # Skip the login screen.
-  services.xserver.displayManager.lightdm.enable = true;
-  services.xserver.displayManager.lightdm.autoLogin.enable = true;
-  services.xserver.displayManager.lightdm.autoLogin.user = "jeremy";
-  #######################
-  # DESKTOP ENVIRONMENT #
-  #######################
-  # X11 windowing system.
+  ###############
+  # ENVIRONMENT #
+  ###############
   services.xserver.enable = true;
-  # Xmonad window manager.
   services.xserver.windowManager.xmonad.enable = true;
   services.xserver.windowManager.xmonad.enableContribAndExtras = true;
-  services.xserver.displayManager.defaultSession = "none+xmonad";
+  environment.variables.EDITOR = "nvim";
   ############
   # PACKAGES #
   ############
