@@ -1,5 +1,5 @@
 Config
-  { font     = "xft:Fira Code Retina:pixelsize=28"
+  { font     = "xft:Montserrat:pixelsize=32"
   , bgColor  = "#1e2029"
   , fgColor  = "#f8f8f2"
   , commands =
