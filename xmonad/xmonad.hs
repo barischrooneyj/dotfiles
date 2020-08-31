@@ -8,6 +8,7 @@ import qualified XMonad.Hooks.DynamicLog          as Log
 import qualified XMonad.Hooks.ManageDocks         as Docks
 import qualified XMonad.Layout.IndependentScreens as IS
 import qualified XMonad.Layout.Spacing            as Space
+import qualified XMonad.StackSet                  as Stack
 import           XMonad.Util.Run                   ( spawnPipe )
 import           XMonad.Util.SpawnOnce             ( spawnOnce )
 import           XMonad.Util.EZConfig              ( additionalKeys )
@@ -56,49 +57,47 @@ main = do
     , X.terminal           = terminal
     }
     `additionalKeys`
-    [
+    ([
     -- Application shortcuts.
-      ((modMask,                 X.xK_w    ), X.spawn browser               )
-    , ((modMask,                 X.xK_e    ), X.spawn editor                )
-    , ((modMask,                 X.xK_t    ), X.spawn terminal              )
+      ((modMask,                 X.xK_w     ), X.spawn browser            )
+    , ((modMask,                 X.xK_e     ), X.spawn editor             )
+    , ((modMask,                 X.xK_t     ), X.spawn terminal           )
     -- Close window.
-    , ((modMask,                 X.xK_q    ), X.kill                        )
+    , ((modMask,                 X.xK_q     ), X.kill                     )
     -- Reload config.
-    , ((modMask,                 X.xK_r    ), resetWM                       )
+    , ((modMask,                 X.xK_r     ), resetWM                    )
     -- Rename current workspace.
-    , ((modMask,                 X.xK_n    ), Names.renameWorkspace X.def   )
-    -- Switch between layers                                                )
-    , ((modMask .|. X.shiftMask, X.xK_space), Nav.switchLayer               )
-    -- Directional navigation of windows                                    )
-    , ((modMask,                 X.xK_h    ), Nav.windowGo Nav.L False      )
-    , ((modMask,                 X.xK_j    ), Nav.windowGo Nav.D False      )
-    , ((modMask,                 X.xK_k    ), Nav.windowGo Nav.U False      )
-    , ((modMask,                 X.xK_l    ), Nav.windowGo Nav.R False      )
-    -- Swap adjacent windows               )                                )
-    , ((modMask .|. X.shiftMask, X.xK_h    ), Nav.windowSwap Nav.L False    )
-    , ((modMask .|. X.shiftMask, X.xK_j    ), Nav.windowSwap Nav.D False    )
-    , ((modMask .|. X.shiftMask, X.xK_k    ), Nav.windowSwap Nav.U False    )
-    , ((modMask .|. X.shiftMask, X.xK_l    ), Nav.windowSwap Nav.R False    )
-    -- Directional navigation of screens                                    )
-    , ((modMask,                 X.xK_a    ), Nav.screenGo Nav.L False      )
-    , ((modMask,                 X.xK_s    ), Nav.screenGo Nav.D False      )
-    , ((modMask,                 X.xK_d    ), Nav.screenGo Nav.U False      )
-    , ((modMask,                 X.xK_f    ), Nav.screenGo Nav.R False      )
-    -- Swap workspaces on adjacent screens                                  )
-    , ((modMask .|. X.shiftMask, X.xK_a    ), Nav.screenSwap Nav.L False    )
-    , ((modMask .|. X.shiftMask, X.xK_s    ), Nav.screenSwap Nav.D False    )
-    , ((modMask .|. X.shiftMask, X.xK_d    ), Nav.screenSwap Nav.U False    )
-    , ((modMask .|. X.shiftMask, X.xK_f    ), Nav.screenSwap Nav.R False    )
-    -- Send window to adjacent screen
-    , ((modMask .|. X.mod1Mask,  X.xK_a    ), Nav.windowToScreen Nav.L False)
-    , ((modMask .|. X.mod1Mask,  X.xK_s    ), Nav.windowToScreen Nav.D False)
-    , ((modMask .|. X.mod1Mask,  X.xK_d    ), Nav.windowToScreen Nav.U False)
-    , ((modMask .|. X.mod1Mask,  X.xK_f    ), Nav.windowToScreen Nav.R False)
-    -- Shrink the master area
-    -- , ((modMask,                 X.xK_<    ), X.sendMessage X.Shrink        )
-    -- Expand the master area
-    -- , ((modMask,                 X.xK_>    ), X.sendMessage X.Expand        )
-    ]
+    , ((modMask,                 X.xK_n     ), Names.renameWorkspace X.def)
+    -- Switch between layers.
+    , ((modMask .|. X.shiftMask, X.xK_space ), Nav.switchLayer            )
+    -- Shrink and expand the master area.
+    , ((modMask .|. X.shiftMask, X.xK_period), X.sendMessage X.Shrink     )
+    , ((modMask .|. X.shiftMask, X.xK_comma ), X.sendMessage X.Expand     )
+    -- Directional navigation of windows.
+    , ((modMask,                 X.xK_h     ), Nav.windowGo   Nav.L False )
+    , ((modMask,                 X.xK_j     ), Nav.windowGo   Nav.D False )
+    , ((modMask,                 X.xK_k     ), Nav.windowGo   Nav.U False )
+    , ((modMask,                 X.xK_l     ), Nav.windowGo   Nav.R False )
+    -- Swap adjacent windows.
+    , ((modMask .|. X.shiftMask, X.xK_h     ), Nav.windowSwap Nav.L False )
+    , ((modMask .|. X.shiftMask, X.xK_j     ), Nav.windowSwap Nav.D False )
+    , ((modMask .|. X.shiftMask, X.xK_k     ), Nav.windowSwap Nav.U False )
+    , ((modMask .|. X.shiftMask, X.xK_l     ), Nav.windowSwap Nav.R False )
+    -- Directional navigation of screens.
+    , ((modMask,                 X.xK_a     ), Nav.screenGo   Nav.L False )
+    , ((modMask,                 X.xK_s     ), Nav.screenGo   Nav.D False )
+    , ((modMask,                 X.xK_d     ), Nav.screenGo   Nav.U False )
+    , ((modMask,                 X.xK_f     ), Nav.screenGo   Nav.R False )
+    -- Swap workspaces on adjacent screens.
+    , ((modMask .|. X.mod1Mask, X.xK_a      ), Nav.screenSwap Nav.L False )
+    , ((modMask .|. X.mod1Mask, X.xK_s      ), Nav.screenSwap Nav.D False )
+    , ((modMask .|. X.mod1Mask, X.xK_d      ), Nav.screenSwap Nav.U False )
+    , ((modMask .|. X.mod1Mask, X.xK_f      ), Nav.screenSwap Nav.R False )
+    ] ++ [
+      ((modMask .|. mask, xK), X.windows $ action i)
+      | (i, xK) <- zip (map show [1 .. 9]) [X.xK_1 .. X.xK_9]
+      , (action, mask) <- [(Stack.view, 0), (Stack.shift, X.shiftMask)]
+    ])
 
 resetWM = X.spawn "xmonad --recompile; xmonad --restart"
 
