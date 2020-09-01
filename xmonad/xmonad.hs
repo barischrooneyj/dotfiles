@@ -88,14 +88,17 @@ main = do
     , ((modMask,                 X.xK_s     ), Nav.screenGo   Nav.D False )
     , ((modMask,                 X.xK_d     ), Nav.screenGo   Nav.U False )
     , ((modMask,                 X.xK_f     ), Nav.screenGo   Nav.R False )
-    -- Swap workspaces on adjacent screens.
-    , ((modMask .|. X.mod1Mask, X.xK_a      ), Nav.screenSwap Nav.L False )
-    , ((modMask .|. X.mod1Mask, X.xK_s      ), Nav.screenSwap Nav.D False )
-    , ((modMask .|. X.mod1Mask, X.xK_d      ), Nav.screenSwap Nav.U False )
-    , ((modMask .|. X.mod1Mask, X.xK_f      ), Nav.screenSwap Nav.R False )
+    -- Move workspace to adjacent screen.
+    -- TODO: this shouldn't swap.
+    , ((modMask .|. X.shiftMask, X.xK_a      ), Nav.screenSwap Nav.L False )
+    , ((modMask .|. X.shiftMask, X.xK_s      ), Nav.screenSwap Nav.D False )
+    , ((modMask .|. X.shiftMask, X.xK_d      ), Nav.screenSwap Nav.U False )
+    , ((modMask .|. X.shiftMask, X.xK_f      ), Nav.screenSwap Nav.R False )
+    -- View workspace N.
+    -- TODO: view on last-used workspace.
     ] ++ [
-      ((modMask .|. mask, xK), X.windows $ action i)
-      | (i, xK) <- zip (map show [1 .. 9]) [X.xK_1 .. X.xK_9]
+      ((modMask .|. mask,        xK          ), X.windows $ action i       )
+      | (i, xK)        <- zip (map show [1 .. 9]) [X.xK_1 .. X.xK_9]
       , (action, mask) <- [(Stack.view, 0), (Stack.shift, X.shiftMask)]
     ])
 
