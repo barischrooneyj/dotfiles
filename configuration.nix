@@ -58,6 +58,10 @@ in {
   services.mbpfan.enable = true;
   # SSD optimisation.
   services.fstrim.enable = true;
+  # 32 bit support, required for Steam.
+  hardware.opengl.driSupport32Bit = true;
+  hardware.opengl.extraPackages32 = with pkgs.pkgsi686Linux ; [ libva ];
+  hardware.pulseaudio.support32Bit = true;
   #########
   # LOGIN #
   #########
@@ -81,8 +85,8 @@ in {
   ############
   environment.systemPackages = with pkgs; [
     bitwarden-cli cabal-install cabal2nix cava curl emacs feh
-    haskellPackages.xmobar home-manager git kitty lsd neofetch neovim rofi
-    spotifyd starship sublime3 tuir tmux vlc wget wirelesstools xclip
+    haskellPackages.xmobar home-manager git kitty lsd neofetch neovim ranger rofi
+    spotifyd starship steam sublime3 tuir tmux vlc wget wirelesstools xclip
     # Unstable packages.
     unstable.firefox-devedition-bin-unwrapped unstable.spotify-tui
   ];
