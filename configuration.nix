@@ -58,7 +58,7 @@ in {
   services.mbpfan.enable = true;
   # SSD optimisation.
   services.fstrim.enable = true;
-  # 32 bit support, required for Steam.
+  # 32 bit support. Required for Steam.
   hardware.opengl.driSupport32Bit = true;
   hardware.opengl.extraPackages32 = with pkgs.pkgsi686Linux ; [ libva ];
   hardware.pulseaudio.support32Bit = true;
@@ -71,7 +71,7 @@ in {
   # USERS #
   #########
   users.users.jeremy.isNormalUser = true;
-  users.users.jeremy.extraGroups = [ "video" "wheel" ];
+  users.users.jeremy.extraGroups = [ "docker" "video" "wheel" ];
   users.users.jeremy.shell = pkgs.fish;
   ###############
   # ENVIRONMENT #
@@ -84,14 +84,18 @@ in {
   # PACKAGES #
   ############
   environment.systemPackages = with pkgs; [
+
     bitwarden-cli cabal-install cabal2nix cava curl emacs feh
-    haskellPackages.xmobar home-manager git kitty lsd neofetch neovim ranger rofi
-    spotifyd starship steam sublime3 tuir tmux vlc wget wirelesstools xclip
+    haskellPackages.xmobar home-manager git kitty lsd neofetch neovim
+    nix-prefetch-git nodePackages.webtorrent_cli ranger rofi spotifyd starship
+    steam sublime3 tree tuir tmux vlc wget wirelesstools xclip
+
     # Unstable packages.
     unstable.firefox-devedition-bin-unwrapped unstable.spotify-tui
   ];
   fonts.fonts = with pkgs; [ fira-code montserrat ];
   programs.fish.enable = true;
+  virtualisation.docker.enable = true;
   ################
   # LOCALISATION #
   ################
