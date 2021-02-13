@@ -2,9 +2,15 @@
 
 let
   unstable = import <nixos-unstable> { config = config.nixpkgs.config; };
+  pinentry-gtk-2 = pkgs.symlinkJoin {
+    name = "pinentry-gtk-2";
+    paths = [ pkgs.pinentry-gtk2 ];
+    buildInputs = [ pkgs.makeWrapper ];
+  };
+
 in {
   # NixOS version.
-  system.stateVersion = "20.03";
+  system.stateVersion = "20.09";
   # Allow unfree software.
   nixpkgs.config.allowUnfree = true;
   # Garbage collect old generations.
@@ -14,91 +20,134 @@ in {
   # HARDWARE #
   ############
   # Include results of the hardware scan.
-  imports = [ ./hardware-configuration.nix ];
+  imports = [ ./hardware-configuration.nix ./cachix.nix ];
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  # Skip boot messages.
+  # Intel microcode.
+  hardware.cpu.intel.updateMicrocode = true;
+  # Icon instead of boot messages.
   boot.plymouth.enable = true;
   # Networking. Per-interface useDHCP will be mandatory in the future.
   networking.useDHCP = false;
   networking.interfaces.wlp3s0.useDHCP = true;
-  networking.hostName = "nixos";
-  networking.wireless.enable = true;  # Via wpa_supplicant.
-  networking.wireless.networks = {
-    "VODAFONE-2.4G" = { psk = "pass"; };
-  };
-  # Keyboard.
+  networking.wireless.enable = true; # Via wpa_supplicant.
+  networking.hostName = "nixos"; # Default hostname.
+  # Keyboard layout.
   services.xserver.layout = "gb";
   services.xserver.xkbVariant = "mac";
-  services.xserver.xkbOptions = "caps:escape";
   console.useXkbConfig = true;
+  # Faster key repeat.
+  services.xserver.autoRepeatDelay = 300;
+  services.xserver.autoRepeatInterval = 25;
   # Trackpad.
   services.xserver.libinput.enable = true;
   services.xserver.libinput.naturalScrolling = true;
-  # Sound and bluetooth.
+  # Sound.
   sound.enable = true;
   hardware.pulseaudio.enable = true;
   hardware.pulseaudio.package = pkgs.pulseaudioFull;
+  # Bluetooth.
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
-  # Display: colour temperature.
-  services.redshift.enable = true;
-  location.provider = "geoclue2";
-  # Display: backlight.
-  programs.light.enable = true;
+  # Webcam.
+  hardware.facetimehd.enable = true; # Mac specific.
+  # Fan controller.
+  services.mbpfan.enable = true; # Mac specific.
+  # SSD optimisation.
+  services.fstrim.enable = true;
+  # OpenGL.
+  hardware.opengl.enable = true;
+  hardware.opengl.driSupport = true;
+  #################
+  # FUNCTION KEYS #
+  #################
   services.actkbd.enable = true;
+  # Display backlight.
+  programs.light.enable = true;
   services.actkbd.bindings = [
     { keys = [ 225 ]; events = [ "key" ]; command = "/run/current-system/sw/bin/light -A 10"; }
     { keys = [ 224 ]; events = [ "key" ]; command = "/run/current-system/sw/bin/light -U 10"; }
   ];
-  # Webcam.
-  hardware.facetimehd.enable = true;
-  # mbpfan fan controller.
-  services.mbpfan.enable = true;
-  # SSD optimisation.
-  services.fstrim.enable = true;
-  # 32 bit support. Required for Steam.
-  hardware.opengl.driSupport32Bit = true;
-  hardware.opengl.extraPackages32 = with pkgs.pkgsi686Linux ; [ libva ];
-  hardware.pulseaudio.support32Bit = true;
-  #########
-  # LOGIN #
-  #########
-  services.xserver.displayManager.lightdm.enable = true;
+  # Sound.
+  sound.mediaKeys.enable = true;
+  ###################
+  # SYSTEM PACKAGES #
+  ###################
+  environment.systemPackages = with pkgs; [
+    # Stable packages.
+    acpi arandr arc-theme asciiquarium betterlockscreen bitwarden-cli blender
+    cabal-install cabal2nix cava cinnamon.nemo cmatrix curl espeak feh git
+    google-chrome haskellPackages.xmobar home-manager insync kitty lsd neofetch
+    neovim nix-prefetch-git nodePackages.webtorrent-cli papirus-icon-theme
+    pavucontrol pinentry-gtk-2 ranger rofi signal-desktop sl spotify spotifyd
+    starship sublime3 texlive.combined.scheme-full toilet tomb transmission-gtk
+    tree tuir tmux vlc wget wirelesstools xclip tomb zip zoom-us
+    direnv
+    # Unstable packages.
+    unstable.brave unstable.emacs unstable.firefox-devedition-bin-unwrapped
+    unstable.steam unstable.spotify-tui
+  ];
+  services.lorri.enable = true;
+  fonts.fonts = with pkgs; [
+    fira-code
+    montserrat
+    (unstable.nerdfonts.override { fonts = [ "FiraCode" ]; })
+  ];
+  virtualisation.docker.enable = true;
+  programs.fish.enable = true;
+  #################
+  # LOGIN MANAGER #
+  #################
+  services.xserver.displayManager.gdm.enable = true;
+  # services.xserver.displayManager.lightdm.greeters.gdm.enable = true;
+  # services.xserver.displayManager.lightdm.greeters.gtk.indicators =
+  #   [ "~spacer" "~clock" "~session" "~a11y" "~power" ];
+  # services.xserver.displayManager.lightdm.greeters.gtk.extraConfig = ''
+  #   active-monitor=1
+  #   background=#zoomed:/etc/lightdm/bg.jpg
+  # '';
   services.xserver.displayManager.defaultSession = "none+xmonad";
-  #########
-  # USERS #
-  #########
-  users.users.jeremy.isNormalUser = true;
-  users.users.jeremy.extraGroups = [ "docker" "video" "wheel" ];
-  users.users.jeremy.shell = pkgs.fish;
-  ###############
-  # ENVIRONMENT #
-  ###############
+  services.xserver.displayManager.sessionCommands = ''
+    /usr/share/display-setup.sh
+  '';
+  ######################
+  # DESKTOP & GRAPHICS #
+  ######################
+  # XMonad.
   services.xserver.enable = true;
   services.xserver.windowManager.xmonad.enable = true;
   services.xserver.windowManager.xmonad.enableContribAndExtras = true;
+  # Wallpaper.
+  services.xserver.desktopManager.wallpaper.mode = "fill";
+  # Redshift enabled by default.
+  services.redshift.enable = true;
+  location.provider = "geoclue2";
+  # VSync.
+  services.xserver.videoDrivers = [ "intel" ];
+  services.xserver.deviceSection = ''
+    Option "DRI"      "2"
+    Option "TearFree" "true"
+  '';
+  # Composer.
+  services.picom.enable = true;
+  ########
+  # USER #
+  ########
+  users.users.jeremy.isNormalUser = true;
+  users.users.jeremy.extraGroups = [ "docker" "video" "wheel" ];
+  users.users.jeremy.shell = pkgs.fish;
+  #################
+  # USER SETTINGS #
+  #################
   environment.variables.EDITOR = "nvim";
-  ############
-  # PACKAGES #
-  ############
-  environment.systemPackages = with pkgs; [
-
-    bitwarden-cli cabal-install cabal2nix cava curl emacs feh
-    haskellPackages.xmobar home-manager git kitty lsd neofetch neovim
-    nix-prefetch-git nodePackages.webtorrent_cli ranger rofi spotifyd starship
-    steam sublime3 tree tuir tmux vlc wget wirelesstools xclip
-
-    # Unstable packages.
-    unstable.firefox-devedition-bin-unwrapped unstable.spotify-tui
-  ];
-  fonts.fonts = with pkgs; [ fira-code montserrat ];
-  programs.fish.enable = true;
-  virtualisation.docker.enable = true;
-  ################
-  # LOCALISATION #
-  ################
+  # Localisation.
   i18n.defaultLocale = "en_IE.UTF-8";
   time.timeZone = "Europe/Dublin";
+  # Wireless networks.
+  networking.wireless.networks = {
+   "ssid"   = { psk = "psk"; };
+  };
+  # Rebind keys.
+  services.xserver.xkbOptions = "caps:escape";
 }

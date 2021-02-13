@@ -1,5 +1,5 @@
 Config
-  { font     = "xft:Montserrat:pixelsize=32"
+  { font     = "xft:Montserrat:pixelsize=16"
   , bgColor  = "#1e2029"
   , fgColor  = "#f8f8f2"
   , commands =
