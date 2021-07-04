@@ -10,7 +10,7 @@ let
 
 in {
   # NixOS version.
-  system.stateVersion = "20.09";
+  system.stateVersion = "21.05";
   # Allow unfree software.
   nixpkgs.config.allowUnfree = true;
   # Garbage collect old generations.
@@ -91,6 +91,8 @@ in {
   services.lorri.enable = true;
   fonts.fonts = with pkgs; [
     fira-code
+    fira-code-symbols
+    iosevka
     montserrat
     (unstable.nerdfonts.override { fonts = [ "FiraCode" ]; })
   ];
