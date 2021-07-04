@@ -28,7 +28,8 @@ gap         = 0 -- Initial gap between windows (without border).
 gapStep     = 5 -- Step size when incrementing/decrementing gap.
 
 -- | Default applications.
-browser  = "brave"
+browser  = "firefox-devedition"
+privateBrowser = "firefox-devedition --private-window"
 editor   = "emacs"
 terminal = "kitty"
 
@@ -76,6 +77,7 @@ main = do
     ([
     -- Application shortcuts.
       ((modMask,                 X.xK_w            ), X.spawn browser            )
+    , ((modMask .|. X.shiftMask, X.xK_w            ), X.spawn privateBrowser     )
     , ((modMask,                 X.xK_e            ), X.spawn editor             )
     , ((modMask,                 X.xK_r            ), X.spawn "rofi -show drun"  )
     , ((modMask .|. X.shiftMask, X.xK_r            ), X.spawn "rofi -show run"   )

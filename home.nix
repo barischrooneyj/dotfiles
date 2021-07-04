@@ -1,8 +1,10 @@
 { config, pkgs, lib, ... }:
 
 {
+  home.file.".tmux.conf".source                 = "/home/jeremy/dotfiles/tmux/.tmux.conf";
   home.file.".config/bg.jpg".source             = "/home/jeremy/dotfiles/background.jpg";
   home.file.".doom.d/config.el".source          = "/home/jeremy/dotfiles/doom/config.el";
+  home.file.".doom.d/init.el".source            = "/home/jeremy/dotfiles/doom/init.el";
   home.file.".doom.d/packages.el".source        = "/home/jeremy/dotfiles/doom/packages.el";
   home.file.".config/fish/config.fish".source   = "/home/jeremy/dotfiles/fish/config.fish";
   home.file.".config/kitty/kitty.conf".source   = "/home/jeremy/dotfiles/kitty/kitty.conf";
@@ -17,5 +19,5 @@
     userName = "jerbaroo";
     userEmail = "jerbaroo.work@pm.me";
   };
-  manual.manpages.enable = false;
+  manual.manpages.enable = false; # Why?
 }

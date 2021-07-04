@@ -1,10 +1,10 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
 (setq display-line-numbers-type 'relative
-      doom-font (font-spec :family "Fira Code" :size 18 :weight 'semi-bold)
+      doom-font (font-spec :family "Fira Code" :size 24 :weight 'semi-bold)
       doom-theme 'doom-dracula
       doom-themes-treemacs-theme "doom-colors"
-      doom-variable-pitch-font (font-spec :family "Fira Code" :size 18 :weight 'semi-bold)
+      doom-variable-pitch-font (font-spec :family "Fira Code" :size 24 :weight 'semi-bold)
       mac-right-option-modifier nil
       ns-use-native-fullscreen t
       org-directory "~/Google Drive/"
