@@ -3,6 +3,7 @@
 {
   home.file.".tmux.conf".source                 = "/home/jeremy/dotfiles/tmux/.tmux.conf";
   home.file.".config/bg.jpg".source             = "/home/jeremy/dotfiles/background.jpg";
+  home.file.".direnvrc".source                  = "/home/jeremy/dotfiles/direnv/.direnvrc";
   home.file.".doom.d/config.el".source          = "/home/jeremy/dotfiles/doom/config.el";
   home.file.".doom.d/init.el".source            = "/home/jeremy/dotfiles/doom/init.el";
   home.file.".doom.d/packages.el".source        = "/home/jeremy/dotfiles/doom/packages.el";
@@ -15,8 +16,8 @@
   home.file.".config/xmobar/xmobar.hs".source   = "/home/jeremy/dotfiles/xmobar/xmobar.hs";
   home.file.".xmonad/xmonad.hs".source          = "/home/jeremy/dotfiles/xmonad/xmonad.hs";
   programs.git = {
-    enable = true;
-    userName = "jerbaroo";
+    enable    = true;
+    userName  = "jerbaroo";
     userEmail = "jerbaroo.work@pm.me";
   };
   manual.manpages.enable = false; # Why?
