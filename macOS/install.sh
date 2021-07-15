@@ -90,9 +90,14 @@ brew install fd findutils ripgrep  # https://github.com/hlissner/doom-emacs#prer
 echo '\n** Installing tmux package manager **\n'
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm || true
 
+##### Bass #####
+curl -L https://get.oh-my.fish | fish
+omf install bass || true
+
 ##### Nix & Cachix ##### 
 echo '\n** Installing Nix and Cachix **\n'
 sh <(curl -L https://nixos.org/nix/install) --darwin-use-unencrypted-nix-store-volume
+. /Users/jer/.nix-profile/etc/profile.d/nix.sh
 nix-env -iA cachix -f https://cachix.org/api/v1/install
 
 ##### Run AppleScripts #####
@@ -103,9 +108,5 @@ nix-env -iA cachix -f https://cachix.org/api/v1/install
 # read -s -k '?Press enter to continue'$'\n'
 # osascript applescript/appearance.scpt
 
-##### Bass #####
-# curl -L https://get.oh-my.fish | fish
-# omf install bass || true
-
 ##### Install "all appropriate" updates #####
-softwareupdate --install --all --restart
+sudo softwareupdate --install --all --restart
