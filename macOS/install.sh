@@ -26,6 +26,10 @@ brew install\
   tree\
   tmux
 
+#### Set git config ####
+git config --global user.name "jerbaroo"
+git config --global user.email jerbaroo.work@pm.me
+
 #### brew install --cask ####
 echo '\n** Installing GUI apps with brew **\n'
 brew install --cask\
