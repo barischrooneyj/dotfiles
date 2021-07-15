@@ -5,7 +5,6 @@
   home.file.".config/bg.jpg".source             = "/home/jeremy/dotfiles/background.jpg";
   home.file.".direnvrc".source                  = "/home/jeremy/dotfiles/direnv/.direnvrc";
   home.file.".doom.d/config.el".source          = "/home/jeremy/dotfiles/doom/config.el";
-  home.file.".doom.d/init.el".source            = "/home/jeremy/dotfiles/doom/init.el";
   home.file.".doom.d/packages.el".source        = "/home/jeremy/dotfiles/doom/packages.el";
   home.file.".config/fish/config.fish".source   = "/home/jeremy/dotfiles/fish/config.fish";
   home.file.".config/kitty/kitty.conf".source   = "/home/jeremy/dotfiles/kitty/kitty.conf";

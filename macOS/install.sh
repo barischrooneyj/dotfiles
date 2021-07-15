@@ -2,67 +2,106 @@
 
 set -euo pipefail
 
-##### Copy Config Files #####
-./home.sh
-
-##### Install Brew #####
+##### Install Homebrew #####
 if hash brew 2>/dev/null; then
-  echo 'Homebrew already installed'
+  echo '\n** Homebrew already installed **\n'
 else
+  echo '\n** Installing Homebrew **\n'
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 fi
 
+#### brew install ####
+echo '\n** Installing terminal apps with brew **\n'
+brew install\
+  direnv\
+  duti\
+  fish\
+  git\
+  homebrew/cask-fonts/font-fira-code-nerd-font\
+  homebrew/cask-fonts/font-iosevka\
+  homebrew/cask-fonts/font-iosevka-nerd-font\
+  lsd\
+  neovim\
+  starship\
+  tree\
+  tmux
+
+#### brew install --cask ####
+echo '\n** Installing GUI apps with brew **\n'
+brew install --cask\
+  bitwarden\
+  brave-browser\
+  discord\
+  docker\
+  flux\
+  homebrew/cask-versions/firefox-developer-edition\
+  kitty\
+  mactex-no-gui\
+  protonvpn\
+  signal\
+  spotify\
+  sublime-text\
+  transmission\
+  vlc
+brew cleanup
+
+#### Connect to VPN ####
+echo '\n** Manually connect to VPN **\n'
+open -a protonvpn
+open -a bitwarden
+read -s -k '?Press enter to continue'$'\n'
+
+##### Copy Config Files #####
+echo '\n** Cloning config files **\n'
+git clone https://github.com/jerbaroo/dotfiles temp-dotfiles
+./temp-dotfiles/macOS/home.sh
+rm -rf temp-dotfiles
+
 ##### Dock #####
 # defaults write com.apple.dock orientation -string left
+echo '\n** Removing apps from the Dock **\n'
 defaults write com.apple.dock persistent-apps -array
 # defaults write com.apple.dock autohide -bool true
 killall Dock
 
-##### Speed up cursor #####
+##### Key repeat #####
+echo '\n** Setting fast key repeat **\n'
 defaults write -g KeyRepeat -int 1
+echo '\n** Disabling press and hold key **\n'
 defaults write -g ApplePressAndHoldEnabled -bool false
 
-##### AppleScript #####
-osascript applescript/security-privacy.scpt >/dev/null
-echo 'Allow Terminal to control your computer\n  System Preferences > Privacy > Accessibility'
-read -s -k '?Press enter to continue'$'\n'
-echo 'Allow Terminal to control your computer\n  System Preferences > Privacy > Automation'
-read -s -k '?Press enter to continue'$'\n'
-osascript applescript/appearance.scpt
-
-##### Fish #####
-brew install fish
+##### fish shell #####
+echo '\n** Switching to the fish shell **\n'
 sudo sh -c 'echo /usr/local/bin/fish >> /etc/shells'
 chsh -s /usr/local/bin/fish
 
-##### Bass #####
-curl -L https://get.oh-my.fish | fish
-omf install bass || true
-
 ##### Doom Emacs #####
+echo '\n** Installing our favourite text editor **\n'
 brew tap d12frosted/emacs-plus && brew install emacs-plus --with-no-titlebar
 git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d || true
-~/.emacs.d/bin/doom install
+echo 'n' | ~/.emacs.d/bin/doom install
 brew install fd findutils ripgrep  # https://github.com/hlissner/doom-emacs#prerequisites
 
-##### pyenv #####
-# https://github.com/pyenv/pyenv/wiki#suggested-build-environment
-brew install pyenv openssl readline sqlite3 xz zlib
-
-##### Tmux #####
-brew install tmux
+##### TPM #####
+echo '\n** Installing tmux package manager **\n'
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm || true
 
-##### Remaining Brew Installs #####
-brew install docker duti lsd neovim starship tmux tree
-brew install --cask brave-browser discord docker flux kitty mactex-no-gui\
-  protonvpn signal spotify sublime-text transmission vlc\
-  homebrew/cask-versions/firefox-developer-edition
-brew install homebrew/cask-fonts/font-fira-code-nerd-font
-
 ##### Nix & Cachix ##### 
+echo '\n** Installing Nix and Cachix **\n'
 sh <(curl -L https://nixos.org/nix/install) --darwin-use-unencrypted-nix-store-volume
 nix-env -iA cachix -f https://cachix.org/api/v1/install
+
+##### Run AppleScripts #####
+# osascript applescript/security-privacy.scpt >/dev/null
+# echo 'Allow Terminal to control your computer\n  System Preferences > Privacy > Accessibility'
+# read -s -k '?Press enter to continue'$'\n'
+# echo 'Allow Terminal to control your computer\n  System Preferences > Privacy > Automation'
+# read -s -k '?Press enter to continue'$'\n'
+# osascript applescript/appearance.scpt
+
+##### Bass #####
+# curl -L https://get.oh-my.fish | fish
+# omf install bass || true
 
 ##### Install "all appropriate" updates #####
 softwareupdate --install --all --restart
